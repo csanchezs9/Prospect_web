@@ -239,6 +239,16 @@ a { color: inherit; text-decoration: none; }
   z-index: 5;
 }
 
+/* PersonalBrand → Cta curve mask */
+.pb-curve {
+  position: absolute; left: 0; right: 0; bottom: -1px;
+  width: 100%; height: 2.5vw;
+  background: var(--bg-grey);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
 .marquee-track {
   display: flex; gap: 4rem; white-space: nowrap;
   animation: marq 28s linear infinite;

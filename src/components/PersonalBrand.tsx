@@ -171,6 +171,9 @@ export default function PersonalBrand() {
               className="pb-parallax absolute inset-0 w-full h-full object-cover will-change-transform"
             />
           </div>
+
+          {/* Curve mask — sits at bottom of frame (pies). Only visible when reveal completes. */}
+          <div className="pb-curve" />
         </div>
       </div>
     </section>
