@@ -27,9 +27,9 @@ export default function Nav() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-5 flex items-center justify-between">
       <Link href="/" className="flex items-baseline gap-2 font-medium tracking-tight">
-        <span className="nav-name-jm">Camilo</span>
+        <span className="nav-name-jm">Santi</span>
         <span className="w-2 h-2 rounded-full bg-[var(--orange1)] inline-block translate-y-[-2px]" />
-        <span className="nav-name-jm">Sanchez</span>
+        <span className="nav-name-jm">Chill </span>
       </Link>
       <nav className="hidden md:flex items-center gap-8 text-sm">
         <Link href="/about" className="nav-link" data-hover data-hover-text="About me">About</Link>

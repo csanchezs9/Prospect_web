@@ -188,6 +188,42 @@ a { color: inherit; text-decoration: none; }
   display: inline-block;
 }
 
+/* Loader actual (wordmark + line + foot) */
+.loader-wordmark {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; align-items: center; gap: .5rem;
+  font-size: clamp(1.6rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--bg-warm);
+  z-index: 2;
+}
+.loader-line {
+  position: absolute;
+  left: 50%; top: 50%;
+  background: var(--orange1);
+  border-radius: 999px;
+  z-index: 1;
+}
+.loader-foot {
+  position: absolute;
+  bottom: 1.8rem; left: 1.8rem; right: 1.8rem;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--bg-warm);
+  opacity: .55;
+  z-index: 3;
+}
+.loader-foot-num {
+  display: flex; align-items: baseline; gap: .2rem;
+  font-size: 1rem; font-weight: 600; letter-spacing: .04em;
+  font-variant-numeric: tabular-nums;
+}
+
 .top-glow {
   position: absolute; top: -10%; left: 0; right: 0; height: 90vh;
   background: radial-gradient(ellipse at 50% 0%, rgba(255,188,149,.85), transparent 60%);

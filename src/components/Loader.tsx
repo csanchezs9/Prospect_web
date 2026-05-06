@@ -35,9 +35,8 @@ export default function Loader() {
         0.2
       )
       .to(wordmark.current, { autoAlpha: 0, duration: 0.4, ease: "power2.out" }, 1.6)
-      .to(line.current, { width: "100vw", height: "100vh", duration: 0.7, ease: "expo.inOut" }, 1.7)
-      .to(overlay.current, { yPercent: -100, duration: 1.0, ease: "expo.inOut" }, 2.3)
-      .to(line.current, { autoAlpha: 0, duration: 0.4 }, 2.3)
+      .to(line.current, { autoAlpha: 0, duration: 0.3 }, 1.7)
+      .to(overlay.current, { yPercent: -100, duration: 1.0, ease: "expo.inOut" }, 1.9)
       .set(overlay.current, { display: "none" });
   }, []);
 
