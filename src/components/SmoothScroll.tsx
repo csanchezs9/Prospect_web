@@ -1,6 +1,10 @@
 "use client";
 import { useEffect } from "react";
 import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll() {
   useEffect(() => {
@@ -9,14 +13,17 @@ export default function SmoothScroll() {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
-    let raf = 0;
-    const tick = (time: number) => {
-      lenis.raf(time);
-      raf = requestAnimationFrame(tick);
+
+    // integracion oficial Lenis + GSAP ScrollTrigger (necesaria para pin sin jitter)
+    lenis.on("scroll", ScrollTrigger.update);
+    const tickerCb = (time: number) => {
+      lenis.raf(time * 1000);
     };
-    raf = requestAnimationFrame(tick);
+    gsap.ticker.add(tickerCb);
+    gsap.ticker.lagSmoothing(0);
+
     return () => {
-      cancelAnimationFrame(raf);
+      gsap.ticker.remove(tickerCb);
       lenis.destroy();
     };
   }, []);
