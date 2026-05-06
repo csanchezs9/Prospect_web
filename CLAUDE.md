@@ -1,14 +1,16 @@
 @AGENTS.md
 
-# Santi Chill — Director Creativo (Portfolio)
+# Santi Chill — Personal Brand Strategist (Portfolio)
 
-Premium portfolio web. Stack: Next.js 16 (App Router) + React 19 + Tailwind v4 + GSAP + Lenis + Three.js.
+Premium portfolio web for a **digital creator / personal brand strategist**. Stack: Next.js 16 (App Router) + React 19 + Tailwind v4 + GSAP + Lenis + Three.js.
 
 ## Voice / Brand
 
-- Audience: clients hiring a creative director / digital creator.
-- Tone: editorial, big typography, slow + buttery animations, lots of whitespace, warm cream palette.
-- Inspiration vibe: Awwwards / FWA grade portfolio (Juan Mora-style refs the user shares. https://juanmora.co/).
+- **Who is Santi:** Personal brand strategist for entrepreneurs. He does NOT do web design, visual identity, product design, or Webflow/Framer builds. Do not pitch design/dev services on the site.
+- **Core positioning line:** "Ayudo a emprendedores a construir marca personal que atrae clientes."
+- **Audience:** entrepreneurs / founders / experts who want authority in their niche.
+- **Tone:** editorial, serious, no emojis anywhere in UI copy. Big typography, slow + buttery animations, lots of whitespace, warm cream palette.
+- **Inspiration vibe:** Awwwards / FWA grade portfolio (Juan Mora-style refs the user shares. https://juanmora.co/).
 
 ## Stack
 
@@ -49,7 +51,7 @@ Sections, top-to-bottom:
 1. `Hero` — image bg + display headline + nav anchor `top`.
 2. `ClickScroll` — pinned 150vh scene. Headline `15 years making people click and scroll my designs`. Two L's of "scroll" act as anchors; thin orange lines drip from each L to a focused shape (one left, one right) and light it up. Live-tracked Bezier paths rebuilt every frame via `gsap.ticker`. See "ClickScroll details" below.
 3. `Marquee` — looping word strip (`Brand • Web • Product • Motion • Identity`).
-4. `Services` — service tiles with mask-reveal.
+4. `Services` — service tiles with mask-reveal. Tag: `Personal Brand Strategist`. Headline: `Ayudo a emprendedores a construir marca personal que atrae clientes.` Three rows (deliverables, not design services): **Auditoría de Marca**, **Narrativa & Storytelling**, **Autoridad & Posicionamiento**. Do NOT add Websites / Visual Branding / Product Design / Webflow & Framer — Santi does not offer those.
 5. `WorkCta` — CTA into selected work.
 6. `PersonalBrand` — long-form personal brand block.
 7. `About` — bio + benefits with curved `ScrollLine` (variant `benefit`).
@@ -104,6 +106,8 @@ Sections expose `data-nav="grey|peach"` to drive Nav color theming.
 - Lines must NOT appear before user has entered the section. Triggers should `start: "top+=10%+ top"` minimum.
 - Never use 5xx Next.js patterns from training data without checking `node_modules/next/dist/docs/`.
 - Don't hardcode `15` / `16` years — keep number copy-editable in one place per section.
+- No emojis in UI copy — site is serious / editorial.
+- Do not reintroduce design/dev service language ("Websites", "Landing Pages", "Visual Branding", "Product Design", "Webflow", "Framer", "UI/UX"). Santi sells personal brand strategy, not design.
 
 ## Commit style
 

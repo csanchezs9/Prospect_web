@@ -7,43 +7,33 @@ if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    title: "Websites & Landing Pages",
-    body: "Sitios premium, rápidos, pensados para convertir.",
+    title: "Auditoría de Marca",
+    body: "Diagnóstico de tu presencia actual y qué falta para destacar.",
     tiles: [
-      { type: "color", v: "#ffbc95" },
-      { type: "shape", v: "/shapes/big-pill-scroll1.png", bg: "#2e54fe" },
-      { type: "color", v: "#f99e76" },
-      { type: "shape", v: "/shapes/big-circle-scroll3.png", bg: "#e8e9ef" },
+      { type: "photo", v: "/aud-marca/IN.png", bg: "#faf6ef" },
+      { type: "photo", v: "/aud-marca/90dias.png", bg: "#faf6ef" },
+      { type: "photo", v: "/aud-marca/infografia.png", bg: "#faf6ef" },
+      { type: "photo", v: "/aud-marca/cliente.png", bg: "#faf6ef" },
     ],
   },
   {
-    title: "Visual Branding",
-    body: "Identidad visual con personalidad y sistema escalable.",
+    title: "Narrativa & Storytelling",
+    body: "Tu historia clara, memorable y que conecta con tu audiencia.",
     tiles: [
-      { type: "shape", v: "/shapes/blue-hexagon-scroll.svg", bg: "#ffbc95" },
-      { type: "color", v: "#2a2a2a" },
-      { type: "shape", v: "/shapes/big-square-scroll1.png", bg: "#faf6ef" },
-      { type: "color", v: "#2e54fe" },
+      { type: "photo", v: "/narrativa/quout.png", bg: "#faf6ef" },
+      { type: "photo", v: "/narrativa/carrusel.png", bg: "#faf6ef" },
+      { type: "photo", v: "/narrativa/grabaccion.png", bg: "#faf6ef" },
+      { type: "photo", v: "/narrativa/arc.png", bg: "#faf6ef" },
     ],
   },
   {
-    title: "Product Design",
-    body: "Interfaces complejas, simplificadas con criterio.",
+    title: "Autoridad & Posicionamiento",
+    body: "Te conviertes en referente obligado de tu nicho.",
     tiles: [
       { type: "color", v: "#e8e9ef" },
-      { type: "shape", v: "/shapes/big-circle-scroll1.png", bg: "#2e54fe" },
-      { type: "color", v: "#f99e76" },
       { type: "shape", v: "/shapes/big-hexagon-scroll1.png", bg: "#ffbc95" },
-    ],
-  },
-  {
-    title: "Webflow & Framer",
-    body: "Implementación con micro-interacciones y CMS limpio.",
-    tiles: [
-      { type: "frame", v: "/shapes/webflow-frame.svg" },
-      { type: "color", v: "#ffbc95" },
-      { type: "frame", v: "/shapes/framer-frame.svg" },
-      { type: "color", v: "#2a2a2a" },
+      { type: "color", v: "#f99e76" },
+      { type: "shape", v: "/shapes/big-circle-scroll1.png", bg: "#2e54fe" },
     ],
   },
 ];
@@ -96,10 +86,10 @@ export default function Services() {
 
   return (
     <section ref={ref} data-nav="grey" className="bg-[var(--bg-warm)] px-6 md:px-10 py-32 space-y-24">
-      <div className="srv-head max-w-4xl">
-        <p className="srv-tag text-xs uppercase tracking-widest text-[var(--orange2)] mb-4">Design Expert</p>
-        <h2 className="srv-h h-display text-[8vw] md:text-[4.5vw] leading-[1.0] flex flex-wrap gap-x-3 gap-y-2">
-          {"Ayudo a marcas a crecer con proyectos como:".split(" ").map((w, i) => (
+      <div className="srv-head text-center">
+        <p className="srv-tag text-xs uppercase tracking-widest text-[var(--orange2)] mb-4">Personal Brand Strategist</p>
+        <h2 className="srv-h h-display text-[12vw] md:text-[7vw] leading-[1.05] flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.05em]">
+          {"Ayudo a emprendedores a construir marca personal que atrae clientes.".split(" ").map((w, i) => (
             <span key={i} className="inline-block overflow-hidden">
               <span className="word inline-block">{w}</span>
             </span>
@@ -113,7 +103,7 @@ export default function Services() {
             <div className="md:col-span-4 space-y-3 md:sticky md:top-32 self-start">
               <div className="flex items-center gap-3">
                 <span className="dot-srv w-2 h-2 rounded-full bg-[var(--orange1)]" />
-                <h3 className="s-title h-display text-3xl md:text-4xl">{s.title}</h3>
+                <h3 className="s-title h-display text-[8vw] md:text-[3.5vw] leading-[1.05]">{s.title}</h3>
               </div>
               <p className="s-body text-base max-w-md">{s.body}</p>
             </div>
@@ -126,6 +116,8 @@ export default function Services() {
                   >
                     {t.type === "color" ? (
                       <div className="tile-fill w-full h-full" style={{ background: t.v }} />
+                    ) : t.type === "photo" ? (
+                      <img src={t.v} alt="" className="tile-fill w-full h-full object-cover" />
                     ) : (
                       <img src={t.v} alt="" className="w-2/3 h-2/3 object-contain" />
                     )}

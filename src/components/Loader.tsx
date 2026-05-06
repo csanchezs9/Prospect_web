@@ -3,45 +3,91 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 /**
- * Replica del loader de juanmora.co:
- * - container-loader: full viewport, fixed, pointer-events none
- * - orange-intro: overlay GRIS con texto "Camilo • Sanchez" (pequeño, naranja)
- * - grow-line: línea naranja diminuta que crece en height (no scaleX)
- * - Al final: overlay sale hacia arriba, line fade.
+ * Editorial loader for a personal brand strategist.
+ * - Cream overlay, ink typography, peach progress accents.
+ * - Bottom-left: counter 00 → 100.
+ * - Bottom-right: rotating phase label (Auditando / Narrando / Posicionando / Construyendo).
+ * - Top-right: name reveal at the end before exit.
+ * - Thin peach progress bar bottom edge.
+ * - Overlay slides up on completion.
  */
 export default function Loader() {
   const overlay = useRef<HTMLDivElement>(null);
-  const line = useRef<HTMLDivElement>(null);
-  const text = useRef<HTMLDivElement>(null);
+  const counter = useRef<HTMLSpanElement>(null);
+  const phase = useRef<HTMLDivElement>(null);
+  const bar = useRef<HTMLDivElement>(null);
+  const name = useRef<HTMLDivElement>(null);
+  const meta = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Anchor: keep line centered while size grows (xPercent/yPercent -50)
-    gsap.set(line.current, { xPercent: -50, yPercent: -50 });
+    const phases = ["AUDITANDO", "NARRANDO", "POSICIONANDO", "CONSTRUYENDO"];
+    const c = { v: 0 };
 
     const tl = gsap.timeline();
+
+    // Bar fills + counter ticks in sync
+    tl.to(bar.current, { scaleX: 1, duration: 2.6, ease: "power2.inOut" }, 0)
+      .to(
+        c,
+        {
+          v: 100,
+          duration: 2.6,
+          ease: "power2.inOut",
+          onUpdate: () => {
+            if (counter.current) counter.current.textContent = String(Math.floor(c.v)).padStart(3, "0");
+          },
+        },
+        0
+      );
+
+    // Phase labels rotate (each label swaps in over 0.65s)
+    phases.forEach((p, i) => {
+      tl.set(phase.current, { textContent: p }, i * 0.65)
+        .fromTo(phase.current, { yPercent: 100, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.4, ease: "expo.out" }, i * 0.65)
+        .to(phase.current, { yPercent: -100, autoAlpha: 0, duration: 0.3, ease: "power2.in" }, i * 0.65 + 0.45);
+    });
+
+    // Name reveal at the end
     tl.fromTo(
-      line.current,
-      { height: "1%", width: "2%" },
-      { height: "60%", duration: 1.2, ease: "power3.inOut" },
-      0.2
-    )
-      .to(text.current, { autoAlpha: 0, duration: 0.4, ease: "power2.out" }, 1.0)
-      .to(line.current, { width: "100%", height: "100%", duration: 0.6, ease: "expo.inOut" }, 1.1)
-      .to(overlay.current, { yPercent: -100, duration: 1.0, ease: "expo.inOut" }, 1.6)
-      .to(line.current, { autoAlpha: 0, duration: 0.4 }, 1.6)
-      .set([overlay.current, line.current], { display: "none" });
+      name.current,
+      { yPercent: 110, autoAlpha: 0 },
+      { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "expo.out" },
+      2.4
+    );
+
+    // Exit
+    tl.to(meta.current, { autoAlpha: 0, duration: 0.4, ease: "power2.out" }, 3.0)
+      .to(overlay.current, { yPercent: -100, duration: 1.1, ease: "expo.inOut" }, 3.2)
+      .set(overlay.current, { display: "none" });
   }, []);
 
   return (
-    <div className="container-loader">
-      <div ref={overlay} className="orange-intro">
-        <div ref={text} className="cont-juan-intro">
-          <span className="nav-name-jm intro">Camilo</span>
-          <span className="dot-jm intro" />
-          <span className="nav-name-jm intro">Sanchez</span>
+    <div ref={overlay} className="loader-root">
+      <div ref={meta} className="loader-meta">
+        <span className="loader-tag top-left">Personal Brand Strategist</span>
+        <span className="loader-tag top-right">2026 — Bogotá / Remote</span>
+
+        <div className="loader-counter bottom-left">
+          <span ref={counter}>000</span>
+          <span className="loader-counter-pct">%</span>
+        </div>
+
+        <div className="loader-phase bottom-right">
+          <div className="loader-phase-mask">
+            <div ref={phase} className="loader-phase-text">AUDITANDO</div>
+          </div>
         </div>
       </div>
-      <div ref={line} className="grow-line" />
+
+      <div ref={name} className="loader-name">
+        <span>Santi</span>
+        <span className="loader-name-dot" />
+        <span>Chill</span>
+      </div>
+
+      <div className="loader-bar-track">
+        <div ref={bar} className="loader-bar-fill" />
+      </div>
     </div>
   );
 }
