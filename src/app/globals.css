@@ -47,11 +47,9 @@ a { color: inherit; text-decoration: none; }
   opacity: 0; transition: opacity .3s;
 }
 @media (hover: hover) and (pointer: fine) {
-  .cursor-jm { opacity: 1; }
-  body { cursor: none; }
-  a, button, [data-hover], .click-btn, .folder, .cta-link { cursor: none; }
+  .cursor-jm { opacity: 0; display: none; }
 }
-.cursor-arrow { width: 1.4rem; height: 1.4rem; opacity: 0; transition: opacity .3s; }
+.cursor-arrow { width: 1.4rem; height: 1.4rem; opacity: 1; transition: opacity .3s; }
 .cursor-text {
   font-size: .75rem; color: var(--ink);
   background: var(--bg-warm); padding: .25rem .55rem; border-radius: 999px;
@@ -59,6 +57,13 @@ a { color: inherit; text-decoration: none; }
 }
 .cursor-jm.hover .cursor-arrow,
 .cursor-jm.hover .cursor-text { opacity: 1; }
+
+/* shape lighting when scroll line connects */
+.cs-shape { transition: filter .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+.cs-shape.lit {
+  filter: drop-shadow(0 0 32px var(--orange1)) drop-shadow(0 0 70px rgba(255,150,80,0.55)) brightness(1.15);
+  transform: scale(1.04);
+}
 
 .nav-link, .nav-name-jm, .nav-social-link { transition: color .4s ease; color: var(--grey); position: relative; }
 .nav-link.is-peach, .nav-name-jm.is-peach, .nav-social-link.is-peach { color: var(--bg-warm); }
