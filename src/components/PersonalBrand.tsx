@@ -15,8 +15,9 @@ export default function PersonalBrand() {
         scrollTrigger: {
           trigger: ref.current,
           start: "top top",
-          end: "+=320%",
+          end: () => `+=${(ref.current?.offsetHeight ?? 0) / 2}`,
           scrub: 1,
+          invalidateOnRefresh: true,
         },
       });
 
