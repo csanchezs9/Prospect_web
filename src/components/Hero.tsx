@@ -1,0 +1,64 @@
+"use client";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+
+export default function Hero() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".hero-line .word", {
+        yPercent: 110,
+        duration: 1.4,
+        ease: "expo.out",
+        stagger: 0.05,
+        delay: 1.6,
+      });
+      gsap.from(".hero-tag", { autoAlpha: 0, y: 20, delay: 2.2, duration: 0.8 });
+      gsap.from(".hero-curve", { scaleY: 0, transformOrigin: "bottom center", duration: 1.4, ease: "expo.out", delay: 2.0 });
+
+      // Parallax on hero text out
+      gsap.to(".hero-content", {
+        y: -60,
+        ease: "none",
+        scrollTrigger: { trigger: ref.current, start: "top top", end: "bottom top", scrub: true },
+      });
+    }, ref);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      ref={ref}
+      data-nav="peach"
+      className="relative min-h-[100svh] flex flex-col justify-end px-6 md:px-10 pb-24 md:pb-32 overflow-hidden bg-[var(--orange1)]"
+    >
+      <div className="top-glow" />
+
+      <div className="hero-content space-y-2 relative z-10">
+        <h1 className="h-display text-[14vw] md:text-[10vw] leading-[0.9] text-[var(--ink)]">
+          {["Brand", "&", "Web"].map((w, i) => (
+            <span key={i} className="hero-line inline-block overflow-hidden mr-[0.18em]">
+              <span className="word inline-block">{w}</span>
+            </span>
+          ))}
+          <br />
+          {["Design", "Studio"].map((w, i) => (
+            <span key={i} className="hero-line inline-block overflow-hidden mr-[0.18em]">
+              <span className="word inline-block">{w}</span>
+            </span>
+          ))}
+        </h1>
+        <div className="hero-tag flex items-end justify-between pt-6">
+          <p className="text-sm md:text-base text-[var(--ink)]">Freelance Designer &amp; Developer</p>
+          <p className="text-sm md:text-base text-right text-[var(--ink)]">15 yrs · Available 2026</p>
+        </div>
+      </div>
+
+      <div className="hero-curve" />
+    </section>
+  );
+}
