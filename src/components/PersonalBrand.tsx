@@ -24,7 +24,7 @@ export default function PersonalBrand() {
           pinType: "transform",
           anticipatePin: 1,
           start: "top top",
-          end: "+=223%",
+          end: "+=161%",
           scrub: 1,
           invalidateOnRefresh: true,
         },
@@ -39,7 +39,8 @@ export default function PersonalBrand() {
 
       tl
         // ===== LOCK 1 — texto SANTICHILL + CREADOR DIGITAL — 0..0.2 =====
-        .fromTo(".pb-oscuro", { opacity: 1 }, { opacity: 0, ease: "none", duration: 0.2 }, 0)
+        // contorno.png queda visible durante texto + hold + inicio reveal, fade out justo antes del parallax
+        .fromTo(".pb-oscuro", { opacity: 1 }, { opacity: 0, ease: "none", duration: 0.15 }, 0.5)
         .fromTo(
           ".pb-text",
           { x: "-45vw", autoAlpha: 1 },
@@ -63,15 +64,15 @@ export default function PersonalBrand() {
           0.35
         )
 
-        // ===== LOCK 2 — parallax oscuro.png entra desde derecha — 0.65..0.8525 =====
+        // ===== LOCK 2 — parallax oscuro.png entra desde derecha — 0.39..0.5925 =====
         .to(
           ".pb-parallax",
           { xPercent: 0, ease: "none", duration: 0.2025 },
-          0.65
+          0.39
         )
 
-        // ===== HOLD final 0.8525..0.9 — frame con pies + oscuro.png congelado al final =====
-        .to({}, { duration: 0.0475 }, 0.8525);
+        // ===== HOLD final 0.5925..0.64 — frame con pies + oscuro.png congelado al final =====
+        .to({}, { duration: 0.0475 }, 0.5925);
     }, ref);
 
     return () => ctx.revert();
@@ -123,7 +124,15 @@ export default function PersonalBrand() {
               className="absolute inset-x-0 z-[3] flex justify-center"
               style={{ top: "20%" }}
             >
-              <div className="pb-text" style={{ whiteSpace: "nowrap" }}>
+              <div
+                className="pb-text"
+                style={{
+                  whiteSpace: "nowrap",
+                  willChange: "transform",
+                  filter:
+                    "drop-shadow(0 4px 12px rgba(0,0,0,0.55)) drop-shadow(0 0 40px rgba(255,150,90,0.45))",
+                }}
+              >
                 <span
                   style={{
                     fontSize: "clamp(5rem, 17vw, 16rem)",
@@ -131,11 +140,10 @@ export default function PersonalBrand() {
                     color: "#ffbc95",
                     fontWeight: 900,
                     lineHeight: 1,
-                    textShadow: "0 0 100px rgba(255,188,149,0.22)",
                     display: "inline-block",
                   }}
                 >
-                  SANTICHILL
+                  Santi Chill
                 </span>
               </div>
             </div>
@@ -144,19 +152,27 @@ export default function PersonalBrand() {
               className="absolute inset-x-0 z-[6] flex justify-center"
               style={{ top: "72%" }}
             >
-              <div className="pb-text-top" style={{ whiteSpace: "nowrap" }}>
+              <div
+                className="pb-text-top"
+                style={{
+                  whiteSpace: "nowrap",
+                  willChange: "transform",
+                  filter:
+                    "drop-shadow(0 3px 10px rgba(0,0,0,0.55)) drop-shadow(0 0 32px rgba(255,150,90,0.45))",
+                }}
+              >
                 <span
                   style={{
-                    fontSize: "clamp(2.8rem, 10vw, 8.5rem)",
-                    letterSpacing: "-0.03em",
+                    fontSize: "clamp(2.4rem, 8vw, 7rem)",
+                    letterSpacing: "-0.02em",
                     color: "#ffbc95",
-                    fontWeight: 700,
+                    fontWeight: 500,
+                    fontStyle: "italic",
                     lineHeight: 1,
-                    textShadow: "0 0 80px rgba(255,188,149,0.18)",
                     display: "inline-block",
                   }}
                 >
-                  CREADOR DIGITAL
+                  Creador Digital
                 </span>
               </div>
             </div>
