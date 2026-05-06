@@ -56,11 +56,6 @@ export default function ClickScroll() {
         a: 1, ease: "none",
         scrollTrigger: { trigger: section, start: "top+=12% top", end: "top+=20% top", scrub: 0.2 },
       });
-      gsap.to(wrapRefs.current[0], {
-        opacity: 0, y: -60, scale: 0.92, ease: "power2.in",
-        scrollTrigger: { trigger: section, start: "top+=48% top", end: "top+=58% top", scrub: 1 },
-      });
-
       // shape B
       gsap.set(wrapRefs.current[1], { opacity: 0, y: 80, scale: 0.9 });
       gsap.to(wrapRefs.current[1], {
@@ -210,7 +205,8 @@ export default function ClickScroll() {
                       onClick={onClick}
                       onMouseEnter={onEnter}
                       onMouseLeave={onLeave}
-                      className="word click-btn"
+                      className="word click-btn relative inline-flex items-center justify-center px-6 py-1 rounded-full cursor-pointer select-none"
+                      style={{ background: "var(--ink)", color: "var(--bg-warm)" }}
                     >
                       click
                       <span ref={hoverRef} className="click-hover-text">who is curious?</span>
