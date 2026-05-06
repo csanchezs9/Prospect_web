@@ -38,39 +38,7 @@ export default function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // ---- STEP 1 ----
-      gsap.from(".s1-good .word, .s1-takes .word", {
-        yPercent: 110,
-        stagger: 0.06,
-        duration: 1.2,
-        ease: "expo.out",
-        scrollTrigger: { trigger: ".step1", start: "top 75%" },
-      });
-      gsap.from(".s1-bottom .word", {
-        yPercent: 110,
-        stagger: 0.05,
-        duration: 1.0,
-        ease: "expo.out",
-        scrollTrigger: { trigger: ".s1-bottom", start: "top 85%" },
-      });
-      gsap.fromTo(
-        ".line-step1",
-        { width: 0 },
-        {
-          width: "100%",
-          ease: "none",
-          scrollTrigger: { trigger: ".step1", start: "top 70%", end: "bottom 50%", scrub: 1 },
-        }
-      );
-      gsap.from(".jm-siluete", {
-        autoAlpha: 0,
-        scale: 0.9,
-        duration: 1.4,
-        ease: "expo.out",
-        scrollTrigger: { trigger: ".step1", start: "top 60%" },
-      });
-
-      // Light overlay fade-in entre step1 y step2
+      // Light overlay fade-in
       gsap.fromTo(
         ".light-jm",
         { autoAlpha: 0 },
@@ -86,17 +54,15 @@ export default function About() {
         }
       );
 
-      // ---- STEP 2 (pinned) ----
+      // ---- STEP 2 (sticky scrub) ----
       ScrollTrigger.matchMedia({
         "(min-width: 768px)": () => {
           const tl = gsap.timeline({
             scrollTrigger: {
-              trigger: ".step2",
+              trigger: ".step2-wrap",
               start: "top top",
-              end: "+=140%",
+              end: "bottom bottom",
               scrub: 1,
-              pin: true,
-              pinSpacing: true,
             },
           });
           tl.from(".s2-h1 .word", { yPercent: 110, stagger: 0.05, ease: "none" })
@@ -155,53 +121,9 @@ export default function About() {
       <div className="dark-jm absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,#5a3a28_0%,transparent_60%),radial-gradient(ellipse_at_70%_70%,#3d2418_0%,transparent_55%)] mix-blend-multiply opacity-30 pointer-events-none" />
       <div className="light-jm absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,rgba(255,236,220,.6)_0%,transparent_70%)] pointer-events-none" />
 
-      {/* ============ STEP 1 ============ */}
-      <div className="step1 relative px-6 md:px-12 pt-32 pb-24 min-h-[110vh] flex flex-col justify-center">
-        <div className="grid md:grid-cols-2 gap-8 items-center max-w-[1400px] mx-auto w-full">
-          {/* Col izq: "Good design" */}
-          <h2 className="s1-good h-display text-[14vw] md:text-[8vw] leading-[0.9]">
-            {"Buen diseño".split(" ").map((w, i) => (
-              <span key={i} className="inline-block overflow-hidden mr-3">
-                <span className="word inline-block">{w}</span>
-              </span>
-            ))}
-          </h2>
-
-          {/* Col der: silueta + "takes time" */}
-          <div className="relative flex flex-col items-center md:items-end gap-4">
-            <img
-              src="/shapes/big-circle-scroll1.png"
-              alt=""
-              aria-hidden
-              className="jm-siluete w-[40vw] md:w-[26vw] max-w-[380px] opacity-80 -mb-4 select-none pointer-events-none"
-            />
-            <h2 className="s1-takes h-display italic text-[14vw] md:text-[8vw] leading-[0.9] text-[var(--blue)] md:text-right">
-              {"toma tiempo".split(" ").map((w, i) => (
-                <span key={i} className="inline-block overflow-hidden mr-3">
-                  <span className="word inline-block">{w}</span>
-                </span>
-              ))}
-            </h2>
-          </div>
-        </div>
-
-        {/* Línea horizontal step1 */}
-        <div className="line-step1-wrap relative w-full max-w-[1400px] mx-auto mt-12 mb-12 h-px">
-          <span className="line-step1 absolute left-0 top-0 h-px bg-[var(--ink)] opacity-30 block" />
-        </div>
-
-        {/* Bottom: "and working with me saves it" */}
-        <h2 className="s1-bottom h-display text-[10vw] md:text-[5.5vw] leading-[1.05] text-center max-w-5xl mx-auto">
-          {"y trabajar conmigo lo ahorra".split(" ").map((w, i) => (
-            <span key={i} className="inline-block overflow-hidden mr-3">
-              <span className="word inline-block">{w}</span>
-            </span>
-          ))}
-        </h2>
-      </div>
-
-      {/* ============ STEP 2 (pinned) ============ */}
-      <div className="step2 relative px-6 md:px-12 py-24 min-h-screen flex flex-col justify-center">
+      {/* ============ STEP 2 (sticky scrub) ============ */}
+      <div className="step2-wrap relative md:h-[240vh]">
+       <div className="step2 relative md:sticky md:top-0 md:h-screen md:overflow-hidden px-6 md:px-12 py-24 flex flex-col justify-center">
         <div className="max-w-[1400px] mx-auto w-full grid md:grid-cols-12 gap-10 items-start">
           {/* Headline 2 lineas */}
           <div className="md:col-span-6 space-y-2">
@@ -261,6 +183,7 @@ export default function About() {
             </li>
           </ul>
         </div>
+       </div>
       </div>
     </section>
   );
