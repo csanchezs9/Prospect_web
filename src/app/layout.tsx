@@ -8,11 +8,11 @@ import Loader from "@/components/Loader";
 const display = Inter({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "Camilo Sanchez — Brand & Web Design",
+  title: "SantiChill — Director Creativo",
   description: "Portfolio inspirado, construido con Next.js + GSAP + Lenis.",
 };
 

@@ -34,27 +34,20 @@ export default function Hero() {
     <section
       ref={ref}
       data-nav="peach"
-      className="relative min-h-[100svh] flex flex-col justify-end px-6 md:px-10 pb-24 md:pb-32 overflow-hidden bg-[var(--orange1)]"
+      className="relative min-h-[100svh] flex flex-col justify-end px-6 md:px-10 pb-24 md:pb-32 overflow-hidden"
     >
-      <div className="top-glow" />
+      {/* Hero bg image */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/brand/hero.png')" }}
+      />
+      {/* Dark overlay para legibilidad del texto */}
+      <div className="absolute inset-0 z-[1] bg-black/40" />
 
       <div className="hero-content space-y-2 relative z-10">
-        <h1 className="h-display text-[14vw] md:text-[10vw] leading-[0.9] text-[var(--ink)]">
-          {["Brand", "&", "Web"].map((w, i) => (
-            <span key={i} className="hero-line inline-block overflow-hidden mr-[0.18em]">
-              <span className="word inline-block">{w}</span>
-            </span>
-          ))}
-          <br />
-          {["Design", "Studio"].map((w, i) => (
-            <span key={i} className="hero-line inline-block overflow-hidden mr-[0.18em]">
-              <span className="word inline-block">{w}</span>
-            </span>
-          ))}
-        </h1>
         <div className="hero-tag flex items-end justify-between pt-6">
-          <p className="text-sm md:text-base text-[var(--ink)]">Freelance Designer &amp; Developer</p>
-          <p className="text-sm md:text-base text-right text-[var(--ink)]">15 yrs · Available 2026</p>
+          <p className="text-sm md:text-base text-white/90">Mentor &amp; Director Creativo</p>
+          <p className="text-sm md:text-base text-right text-white/90">2026</p>
         </div>
       </div>
 
