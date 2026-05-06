@@ -24,18 +24,18 @@ export default function PersonalBrand() {
         .fromTo(
           ".pb-text",
           { x: "-45vw", autoAlpha: 1 },
-          { x: "40vw", autoAlpha: 1, ease: "none", duration: 0.55 },
+          { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.55 },
           0
         )
         .fromTo(
           ".pb-text-top",
           { x: "45vw", autoAlpha: 1 },
-          { x: "-40vw", autoAlpha: 1, ease: "none", duration: 0.55 },
+          { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.55 },
           0
         )
-        .to(".pb-text", { x: "40vw", ease: "none", duration: 0.1 }, 0.55)
-        .to(".pb-text-top", { x: "-40vw", ease: "none", duration: 0.1 }, 0.55)
-        .to([".pb-text", ".pb-text-top"], { autoAlpha: 0, ease: "none", duration: 0.1 }, 0.65);
+        // se quedan centrados durante el resto del pin
+        .to(".pb-text", { x: "0vw", ease: "none", duration: 0.45 }, 0.55)
+        .to(".pb-text-top", { x: "0vw", ease: "none", duration: 0.45 }, 0.55);
     }, ref);
 
     return () => ctx.revert();
