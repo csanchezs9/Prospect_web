@@ -10,6 +10,9 @@ export default function PersonalBrand() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // parallax img empieza fuera de pantalla; queda asi durante LOCK 1 + gap
+      gsap.set(".pb-parallax", { xPercent: 110 });
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ref.current,
@@ -20,33 +23,28 @@ export default function PersonalBrand() {
       });
 
       tl
-        // ===== LOCK 1 — mitad superior =====
-        .fromTo(".pb-oscuro", { opacity: 1 }, { opacity: 0, ease: "none", duration: 0.55 }, 0)
+        // ===== LOCK 1 — mitad superior — primer 40% scroll =====
+        .fromTo(".pb-oscuro", { opacity: 1 }, { opacity: 0, ease: "none", duration: 0.4 }, 0)
         .fromTo(
           ".pb-text",
           { x: "-45vw", autoAlpha: 1 },
-          { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.55 },
+          { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.4 },
           0
         )
         .fromTo(
           ".pb-text-top",
           { x: "45vw", autoAlpha: 1 },
-          { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.55 },
+          { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.4 },
           0
         )
 
-        // ===== LOCK 2 — mitad inferior, arranca apenas termina LOCK 1 =====
-        .fromTo(
-          ".pb-text2-main",
-          { yPercent: 120, autoAlpha: 0 },
-          { yPercent: 0, autoAlpha: 1, ease: "none", duration: 0.55 },
-          0.55
-        )
-        .fromTo(
-          ".pb-text2-sub",
-          { x: "30vw", autoAlpha: 0 },
-          { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.55 },
-          0.55
+        // ===== GAP 0.4 → 0.75 — user baja libre, sin animacion =====
+
+        // ===== LOCK 2 — parallax oscuro.png — ultimo 25% scroll =====
+        .to(
+          ".pb-parallax",
+          { xPercent: 0, ease: "none", duration: 0.25 },
+          0.75
         );
     }, ref);
 
@@ -134,52 +132,14 @@ export default function PersonalBrand() {
           </div>
         </div>
 
-        {/* mitad inferior de la imagen — segunda animacion */}
+        {/* mitad inferior — parallax oscuro.png encima de gsap2 */}
         <div className="absolute inset-x-0 bottom-0 h-1/2 z-[7] pointer-events-none select-none overflow-hidden">
-          {/* headline grande */}
-          <div
-            className="absolute inset-x-0 flex justify-center"
-            style={{ top: "20%" }}
-          >
-            <div style={{ overflow: "hidden", display: "inline-block" }}>
-              <div className="pb-text2-main" style={{ whiteSpace: "nowrap" }}>
-                <span
-                  style={{
-                    fontSize: "clamp(4rem, 13vw, 12rem)",
-                    letterSpacing: "-0.04em",
-                    color: "#ffbc95",
-                    fontWeight: 900,
-                    lineHeight: 1,
-                    textShadow: "0 0 90px rgba(255,188,149,0.22)",
-                    display: "inline-block",
-                  }}
-                >
-                  AUTORIDAD
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* subtitulo */}
-          <div
-            className="absolute inset-x-0 flex justify-center"
-            style={{ top: "62%" }}
-          >
-            <div className="pb-text2-sub" style={{ whiteSpace: "nowrap" }}>
-              <span
-                style={{
-                  fontSize: "clamp(1.8rem, 5.5vw, 4.5rem)",
-                  letterSpacing: "-0.02em",
-                  color: "#ffbc95",
-                  fontWeight: 600,
-                  lineHeight: 1,
-                  display: "inline-block",
-                }}
-              >
-                marca personal que atrae clientes
-              </span>
-            </div>
-          </div>
+          <img
+            src="/brand/oscuro.png"
+            alt=""
+            aria-hidden
+            className="pb-parallax absolute inset-0 w-full h-full object-cover will-change-transform"
+          />
         </div>
       </div>
     </section>
