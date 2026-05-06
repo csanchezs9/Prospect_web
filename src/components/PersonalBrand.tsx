@@ -15,9 +15,7 @@ export default function PersonalBrand() {
           trigger: ref.current,
           start: "top top",
           end: "+=320%",
-          pin: true,
           scrub: 1,
-          anticipatePin: 1,
         },
       });
 
@@ -58,23 +56,23 @@ export default function PersonalBrand() {
     <section
       ref={ref}
       data-nav="peach"
-      className="relative w-full min-h-screen"
-      style={{ backgroundColor: "#0a0a0a", overflow: "hidden" }}
+      className="relative w-screen left-1/2 -translate-x-1/2"
+      style={{ backgroundColor: "#0a0a0a", overflow: "visible", height: "calc(100vw * 0.876)" }}
     >
       {/* z-1 — foto base */}
       <img
-        src="/gsap/santichill.png"
+        src="/gsap2/him.png"
         alt=""
         aria-hidden
-        className="absolute inset-0 z-[1] h-full w-full object-cover object-center select-none pointer-events-none"
+        className="absolute left-1/2 top-0 z-[1] w-screen h-auto -translate-x-1/2 select-none pointer-events-none"
       />
 
       {/* z-2 — overlay oscuro (debajo del texto para mantener opacidad constante) */}
       <img
-        src="/gsap/oscuro.png"
+        src="/gsap2/him_contorno.png"
         alt=""
         aria-hidden
-        className="pb-oscuro absolute inset-0 z-[2] h-full w-full object-cover object-center pointer-events-none"
+        className="pb-oscuro absolute left-1/2 top-0 z-[2] w-screen h-auto -translate-x-1/2 pointer-events-none"
       />
 
       {/* z-3 — texto SANTICHILL: cruza horizontalmente a la altura de la cabeza */}
@@ -101,10 +99,10 @@ export default function PersonalBrand() {
 
       {/* z-4 — recorte de la persona (texto pasa por detras de la cabeza) */}
       <img
-        src="/gsap/capa3.png"
+        src="/gsap2/him_no_bg.png"
         alt=""
         aria-hidden
-        className="absolute inset-0 z-[4] h-full w-full object-cover object-center select-none pointer-events-none"
+        className="absolute left-1/2 top-0 z-[4] w-screen h-auto -translate-x-1/2 select-none pointer-events-none"
       />
 
       {/* z-5 — texto superior: siempre encima del sujeto */}
