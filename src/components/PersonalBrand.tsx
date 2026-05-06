@@ -24,7 +24,7 @@ export default function PersonalBrand() {
           pinType: "transform",
           anticipatePin: 1,
           start: "top top",
-          end: "+=161%",
+          end: "+=211%",
           scrub: 1,
           invalidateOnRefresh: true,
         },
@@ -71,8 +71,8 @@ export default function PersonalBrand() {
           0.39
         )
 
-        // ===== HOLD final 0.5925..0.64 — frame con pies + oscuro.png congelado al final =====
-        .to({}, { duration: 0.0475 }, 0.5925);
+        // ===== HOLD final 0.65..0.85 — frame con pies + oscuro.png congelado al final =====
+        .to(frameRef.current, { y: frameY, ease: "none", duration: 0.2 }, 0.65);
     }, ref);
 
     return () => ctx.revert();
