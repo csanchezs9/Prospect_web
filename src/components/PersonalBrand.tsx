@@ -24,7 +24,7 @@ export default function PersonalBrand() {
           pinType: "transform",
           anticipatePin: 1,
           start: "top top",
-          end: "+=500%",
+          end: "+=185%",
           scrub: 1,
           invalidateOnRefresh: true,
         },
@@ -53,22 +53,22 @@ export default function PersonalBrand() {
           0
         )
 
-        // ===== REVEAL — frame translada Y, revela pies de Santi — 0.2..0.75 =====
+        // ===== REVEAL — frame translada Y, revela pies de Santi — 0.2..0.5 =====
         .to(
           frameRef.current,
-          { y: frameY, ease: "none", duration: 0.55 },
+          { y: frameY, ease: "none", duration: 0.3 },
           0.2
         )
 
-        // ===== LOCK 2 — parallax oscuro.png entra desde derecha — 0.75..0.9 =====
+        // ===== LOCK 2 — parallax oscuro.png entra desde derecha — 0.5..0.7025 =====
         .to(
           ".pb-parallax",
-          { xPercent: 0, ease: "none", duration: 0.15 },
-          0.75
+          { xPercent: 0, ease: "none", duration: 0.2025 },
+          0.5
         )
 
-        // ===== HOLD final 0.9..1.0 — frame con pies + oscuro.png congelado al final =====
-        .to({}, { duration: 0.1 }, 0.9);
+        // ===== HOLD final 0.7025..0.75 — frame con pies + oscuro.png congelado al final =====
+        .to({}, { duration: 0.0475 }, 0.7025);
     }, ref);
 
     return () => ctx.revert();
