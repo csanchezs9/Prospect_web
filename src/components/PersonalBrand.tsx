@@ -20,6 +20,7 @@ export default function PersonalBrand() {
       });
 
       tl
+        // ===== LOCK 1 — mitad superior =====
         .fromTo(".pb-oscuro", { opacity: 1 }, { opacity: 0, ease: "none", duration: 0.55 }, 0)
         .fromTo(
           ".pb-text",
@@ -33,9 +34,20 @@ export default function PersonalBrand() {
           { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.55 },
           0
         )
-        // se quedan centrados durante el resto del pin
-        .to(".pb-text", { x: "0vw", ease: "none", duration: 0.45 }, 0.55)
-        .to(".pb-text-top", { x: "0vw", ease: "none", duration: 0.45 }, 0.55);
+
+        // ===== LOCK 2 — mitad inferior, arranca apenas termina LOCK 1 =====
+        .fromTo(
+          ".pb-text2-main",
+          { yPercent: 120, autoAlpha: 0 },
+          { yPercent: 0, autoAlpha: 1, ease: "none", duration: 0.55 },
+          0.55
+        )
+        .fromTo(
+          ".pb-text2-sub",
+          { x: "30vw", autoAlpha: 0 },
+          { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.55 },
+          0.55
+        );
     }, ref);
 
     return () => ctx.revert();
@@ -46,7 +58,7 @@ export default function PersonalBrand() {
       ref={ref}
       data-nav="peach"
       className="relative w-screen left-1/2 -translate-x-1/2"
-      style={{ backgroundColor: "#0a0a0a", height: "400vh" }}
+      style={{ backgroundColor: "#0a0a0a", height: "430vh" }}
     >
       {/* sticky frame: alto = aspect imagen → imagen completa visible, sin crop */}
       <div
@@ -122,9 +134,52 @@ export default function PersonalBrand() {
           </div>
         </div>
 
-        {/* mitad inferior de la imagen — placeholder para contenido futuro */}
-        <div className="absolute inset-x-0 bottom-0 h-1/2 z-[7] pointer-events-none">
-          {/* TBD */}
+        {/* mitad inferior de la imagen — segunda animacion */}
+        <div className="absolute inset-x-0 bottom-0 h-1/2 z-[7] pointer-events-none select-none overflow-hidden">
+          {/* headline grande */}
+          <div
+            className="absolute inset-x-0 flex justify-center"
+            style={{ top: "20%" }}
+          >
+            <div style={{ overflow: "hidden", display: "inline-block" }}>
+              <div className="pb-text2-main" style={{ whiteSpace: "nowrap" }}>
+                <span
+                  style={{
+                    fontSize: "clamp(4rem, 13vw, 12rem)",
+                    letterSpacing: "-0.04em",
+                    color: "#ffbc95",
+                    fontWeight: 900,
+                    lineHeight: 1,
+                    textShadow: "0 0 90px rgba(255,188,149,0.22)",
+                    display: "inline-block",
+                  }}
+                >
+                  AUTORIDAD
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* subtitulo */}
+          <div
+            className="absolute inset-x-0 flex justify-center"
+            style={{ top: "62%" }}
+          >
+            <div className="pb-text2-sub" style={{ whiteSpace: "nowrap" }}>
+              <span
+                style={{
+                  fontSize: "clamp(1.8rem, 5.5vw, 4.5rem)",
+                  letterSpacing: "-0.02em",
+                  color: "#ffbc95",
+                  fontWeight: 600,
+                  lineHeight: 1,
+                  display: "inline-block",
+                }}
+              >
+                marca personal que atrae clientes
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
