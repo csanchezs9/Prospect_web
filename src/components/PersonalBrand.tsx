@@ -66,53 +66,52 @@ export default function PersonalBrand() {
           src="/gsap2/him.png"
           alt=""
           aria-hidden
-          className="absolute inset-0 z-[1] w-full h-full object-contain select-none pointer-events-none"
+          className="absolute inset-0 z-[1] w-full h-full object-fill select-none pointer-events-none"
         />
 
         {/* z-2 — overlay oscuro (debajo del texto para mantener opacidad constante) */}
         <img
-          src="/gsap2/him_contorno_aligned.png"
+          src="/gsap2/contorno.png"
           alt=""
           aria-hidden
-          className="pb-oscuro absolute inset-0 z-[2] w-full h-full object-contain pointer-events-none"
+          className="pb-oscuro absolute inset-0 z-[2] w-full h-full object-fill pointer-events-none"
         />
 
         {/* z-4 — recorte de la persona (texto pasa por detras de la cabeza) */}
         <img
-          src="/gsap2/him_no_bg_aligned.png"
+          src="/gsap2/no_bg.png"
           alt=""
           aria-hidden
-          className="absolute inset-0 z-[4] w-full h-full object-contain select-none pointer-events-none"
+          className="absolute inset-0 z-[4] w-full h-full object-fill select-none pointer-events-none"
         />
       </div>
 
-      {/* texto y animaciones solo en la mitad superior */}
-      <div className="absolute inset-x-0 top-0 z-[5] h-1/2 pointer-events-none select-none">
-        {/* z-3 — texto SANTICHILL: cruza horizontalmente a la altura de la cabeza */}
-        <div
-          className="absolute inset-x-0 z-[3] flex justify-center"
-          style={{ top: "20%" }}
-        >
-          <div className="pb-text" style={{ whiteSpace: "nowrap" }}>
-            <span
-              style={{
-                fontSize: "clamp(5rem, 17vw, 16rem)",
-                letterSpacing: "-0.045em",
-                color: "#ffbc95",
-                fontWeight: 900,
-                lineHeight: 1,
-                textShadow: "0 0 100px rgba(255,188,149,0.22)",
-                display: "inline-block",
-              }}
-            >
-              SANTICHILL
-            </span>
-          </div>
+      {/* z-3 — texto SANTICHILL: pasa POR DETRAS del sujeto (entre overlay z-2 y persona z-4) */}
+      <div
+        className="absolute inset-x-0 z-[3] flex justify-center pointer-events-none select-none"
+        style={{ top: "10%" }}
+      >
+        <div className="pb-text" style={{ whiteSpace: "nowrap" }}>
+          <span
+            style={{
+              fontSize: "clamp(5rem, 17vw, 16rem)",
+              letterSpacing: "-0.045em",
+              color: "#ffbc95",
+              fontWeight: 900,
+              lineHeight: 1,
+              textShadow: "0 0 100px rgba(255,188,149,0.22)",
+              display: "inline-block",
+            }}
+          >
+            SANTICHILL
+          </span>
         </div>
+      </div>
 
-        {/* z-5 — texto superior: siempre encima del sujeto */}
+      {/* texto superior: siempre encima del sujeto */}
+      <div className="absolute inset-x-0 top-0 z-[6] h-1/2 pointer-events-none select-none">
         <div
-          className="absolute inset-x-0 z-[5] flex justify-center"
+          className="absolute inset-x-0 flex justify-center"
           style={{ top: "72%" }}
         >
           <div className="pb-text-top" style={{ whiteSpace: "nowrap" }}>
