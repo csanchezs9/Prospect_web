@@ -7,6 +7,7 @@ if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 export default function PersonalBrand() {
   const ref = useRef<HTMLElement>(null);
+  const imgRatio = 1174 / 1339;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -57,73 +58,78 @@ export default function PersonalBrand() {
       ref={ref}
       data-nav="peach"
       className="relative w-screen left-1/2 -translate-x-1/2"
-      style={{ backgroundColor: "#0a0a0a", overflow: "visible", height: "calc(100vw * 0.876)" }}
+      style={{ backgroundColor: "#0a0a0a", overflow: "visible", height: `calc(100vw * ${imgRatio})` }}
     >
-      {/* z-1 — foto base */}
-      <img
-        src="/gsap2/him.png"
-        alt=""
-        aria-hidden
-        className="absolute left-1/2 top-0 z-[1] w-screen h-auto -translate-x-1/2 select-none pointer-events-none"
-      />
+      <div className="absolute inset-0">
+        {/* z-1 — foto base */}
+        <img
+          src="/gsap2/him.png"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 z-[1] w-full h-full object-contain select-none pointer-events-none"
+        />
 
-      {/* z-2 — overlay oscuro (debajo del texto para mantener opacidad constante) */}
-      <img
-        src="/gsap2/him_contorno.png"
-        alt=""
-        aria-hidden
-        className="pb-oscuro absolute left-1/2 top-0 z-[2] w-screen h-auto -translate-x-1/2 pointer-events-none"
-      />
+        {/* z-2 — overlay oscuro (debajo del texto para mantener opacidad constante) */}
+        <img
+          src="/gsap2/him_contorno_aligned.png"
+          alt=""
+          aria-hidden
+          className="pb-oscuro absolute inset-0 z-[2] w-full h-full object-contain pointer-events-none"
+        />
 
-      {/* z-3 — texto SANTICHILL: cruza horizontalmente a la altura de la cabeza */}
-      <div
-        className="absolute inset-x-0 z-[3] flex justify-center pointer-events-none select-none"
-        style={{ top: "20%" }}
-      >
-        <div className="pb-text" style={{ whiteSpace: "nowrap" }}>
-          <span
-            style={{
-              fontSize: "clamp(5rem, 17vw, 16rem)",
-              letterSpacing: "-0.045em",
-              color: "#ffbc95",
-              fontWeight: 900,
-              lineHeight: 1,
-              textShadow: "0 0 100px rgba(255,188,149,0.22)",
-              display: "inline-block",
-            }}
-          >
-            SANTICHILL
-          </span>
-        </div>
+        {/* z-4 — recorte de la persona (texto pasa por detras de la cabeza) */}
+        <img
+          src="/gsap2/him_no_bg_aligned.png"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 z-[4] w-full h-full object-contain select-none pointer-events-none"
+        />
       </div>
 
-      {/* z-4 — recorte de la persona (texto pasa por detras de la cabeza) */}
-      <img
-        src="/gsap2/him_no_bg.png"
-        alt=""
-        aria-hidden
-        className="absolute left-1/2 top-0 z-[4] w-screen h-auto -translate-x-1/2 select-none pointer-events-none"
-      />
+      {/* texto y animaciones solo en la mitad superior */}
+      <div className="absolute inset-x-0 top-0 z-[5] h-1/2 pointer-events-none select-none">
+        {/* z-3 — texto SANTICHILL: cruza horizontalmente a la altura de la cabeza */}
+        <div
+          className="absolute inset-x-0 z-[3] flex justify-center"
+          style={{ top: "20%" }}
+        >
+          <div className="pb-text" style={{ whiteSpace: "nowrap" }}>
+            <span
+              style={{
+                fontSize: "clamp(5rem, 17vw, 16rem)",
+                letterSpacing: "-0.045em",
+                color: "#ffbc95",
+                fontWeight: 900,
+                lineHeight: 1,
+                textShadow: "0 0 100px rgba(255,188,149,0.22)",
+                display: "inline-block",
+              }}
+            >
+              SANTICHILL
+            </span>
+          </div>
+        </div>
 
-      {/* z-5 — texto superior: siempre encima del sujeto */}
-      <div
-        className="absolute inset-x-0 z-[5] flex justify-center pointer-events-none select-none"
-        style={{ top: "72%" }}
-      >
-        <div className="pb-text-top" style={{ whiteSpace: "nowrap" }}>
-          <span
-            style={{
-              fontSize: "clamp(2.8rem, 10vw, 8.5rem)",
-              letterSpacing: "-0.03em",
-              color: "#ffbc95",
-              fontWeight: 700,
-              lineHeight: 1,
-              textShadow: "0 0 80px rgba(255,188,149,0.18)",
-              display: "inline-block",
-            }}
-          >
-            CREADOR DIGITAL
-          </span>
+        {/* z-5 — texto superior: siempre encima del sujeto */}
+        <div
+          className="absolute inset-x-0 z-[5] flex justify-center"
+          style={{ top: "72%" }}
+        >
+          <div className="pb-text-top" style={{ whiteSpace: "nowrap" }}>
+            <span
+              style={{
+                fontSize: "clamp(2.8rem, 10vw, 8.5rem)",
+                letterSpacing: "-0.03em",
+                color: "#ffbc95",
+                fontWeight: 700,
+                lineHeight: 1,
+                textShadow: "0 0 80px rgba(255,188,149,0.18)",
+                display: "inline-block",
+              }}
+            >
+              CREADOR DIGITAL
+            </span>
+          </div>
         </div>
       </div>
 
