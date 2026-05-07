@@ -73,7 +73,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="f-name flex items-baseline justify-between border-t border-white/20 pt-8">
+        <div className="f-name flex items-baseline justify-between pt-8">
           <h2 className="h-display text-[22vw] md:text-[13vw] leading-none flex text-[var(--orange1)]">
             {"Santi".split("").map((c, i) => (
               <span key={i} className="inline-block overflow-hidden"><span className="letter inline-block">{c}</span></span>
