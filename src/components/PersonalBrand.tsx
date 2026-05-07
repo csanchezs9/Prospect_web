@@ -115,7 +115,7 @@ export default function PersonalBrand() {
                 <span
                   className="h-display"
                   style={{
-                    fontSize: "clamp(6rem, 20.4vw, 19.2rem)",
+                    fontSize: "min(15vw, 19.2rem)",
                     letterSpacing: "-0.04em",
                     color: "#ffbc95",
                     fontWeight: 500,
@@ -141,7 +141,7 @@ export default function PersonalBrand() {
                 <span
                   className="h-display"
                   style={{
-                    fontSize: "clamp(6rem, 20.4vw, 19.2rem)",
+                    fontSize: "min(15vw, 19.2rem)",
                     letterSpacing: "-0.04em",
                     color: "#ffbc95",
                     fontWeight: 500,
