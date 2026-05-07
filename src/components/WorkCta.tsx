@@ -40,7 +40,7 @@ export default function WorkCta() {
     <section
       ref={ref}
       data-nav="grey"
-      className="bg-[var(--bg-grey)] px-2 md:px-4 py-40 flex flex-col items-center text-center gap-8 relative overflow-hidden"
+      className="bg-[var(--bg-grey)] px-2 md:px-4 pt-16 pb-24 flex flex-col items-center text-center gap-4 relative overflow-hidden"
     >
       <h2 className="big-work h-display text-[28vw] md:text-[20vw] leading-none text-[var(--ink)] flex justify-center">
         <span className="inline-block overflow-hidden"><span className="letter inline-block">W</span></span>
@@ -48,7 +48,7 @@ export default function WorkCta() {
         <span className="inline-block overflow-hidden"><span className="letter inline-block">r</span></span>
         <span className="inline-block overflow-hidden"><span className="letter inline-block">k</span></span>
       </h2>
-      <p className="work-text text-base mt-4">Mira Mi Trabajo</p>
+      <p className="work-text text-base">Mira Mi Trabajo</p>
       <div className="ipad-frame">
         <span className="ipad-camera" aria-hidden />
         <button

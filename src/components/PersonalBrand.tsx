@@ -12,12 +12,19 @@ export default function PersonalBrand() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // start 28% antes en mobile (responsive)
+      const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
+      const startMain = isMobile ? "top 53%" : "top 25%";
+      const endMain = isMobile ? "center 43%" : "center 15%";
+      const startSep = isMobile ? "top 33%" : "top 5%";
+      const endSep = isMobile ? "top 18%" : "top -10%";
+
       // anim on-enter solo, sin pin/sticky — imagen scrollea natural
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ref.current,
-          start: "top 25%",
-          end: "center 15%",
+          start: startMain,
+          end: endMain,
           scrub: 1,
           invalidateOnRefresh: true,
         },
@@ -44,8 +51,8 @@ export default function PersonalBrand() {
         ease: "expo.out",
         scrollTrigger: {
           trigger: ref.current,
-          start: "top 5%",
-          end: "top -10%",
+          start: startSep,
+          end: endSep,
           scrub: 1,
         },
       });
@@ -54,8 +61,8 @@ export default function PersonalBrand() {
         ease: "expo.out",
         scrollTrigger: {
           trigger: ref.current,
-          start: "top 5%",
-          end: "top -10%",
+          start: startSep,
+          end: endSep,
           scrub: 1,
         },
       });
