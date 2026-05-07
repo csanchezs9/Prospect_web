@@ -14,8 +14,8 @@ export default function PersonalBrand() {
     const ctx = gsap.context(() => {
       // start 28% antes en mobile (responsive)
       const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
-      const startMain = isMobile ? "top 53%" : "top 25%";
-      const endMain = isMobile ? "center 43%" : "center 15%";
+      const startMain = isMobile ? "top 66%" : "top 38%";
+      const endMain = isMobile ? "center 56%" : "center 28%";
       const startSep = isMobile ? "top 33%" : "top 5%";
       const endSep = isMobile ? "top 18%" : "top -10%";
 

@@ -79,10 +79,10 @@ export default function ClickScroll() {
         const pinRect = pin.getBoundingClientRect();
         const headlineEl = pin.querySelector(".cs-headline") as HTMLElement | null;
         const hRect = headlineEl?.getBoundingClientRect();
-        const hLeft = hRect ? hRect.left - pinRect.left - 32 : 0;
-        const hRight = hRect ? hRect.right - pinRect.left + 32 : pinRect.width;
-        const hTop = hRect ? hRect.top - pinRect.top - 32 : 0;
-        const hBottom = hRect ? hRect.bottom - pinRect.top + 32 : pinRect.height;
+        const hLeft = hRect ? hRect.left - pinRect.left - 16 : 0;
+        const hRight = hRect ? hRect.right - pinRect.left + 16 : pinRect.width;
+        const hTop = hRect ? hRect.top - pinRect.top - 16 : 0;
+        const hBottom = hRect ? hRect.bottom - pinRect.top + 16 : pinRect.height;
         for (let i = 0; i < 2; i++) {
           const anchor = anchors[i].current;
           const shape = shapeRefs.current[i];
@@ -97,12 +97,25 @@ export default function ClickScroll() {
           const ex = tRect.left + tRect.width / 2 - pinRect.left;
           const ey = tRect.top + tRect.height / 2 - pinRect.top;
 
-          // Routing: salida lateral del headline → corner exterior → shape
-          const exitX = i === 0 ? hLeft : hRight;
-          const exitY = ey < sy ? hTop : hBottom;
+          // Arc simetrico: cp1 y cp2 bowing perpendicular a la linea start->end,
+          // mismo signo que dx. Resultado: arco redondo limpio, sin S-shape ni overshoot.
+          const dx = ex - sx;
+          const dy = ey - sy;
+          const dist = Math.hypot(dx, dy) || 1;
+          let nx = -dy / dist;
+          let ny = dx / dist;
+          // forzar perpendicular que apunte hacia el lado del shape (outward de text)
+          if ((dx >= 0 && nx < 0) || (dx < 0 && nx > 0)) {
+            nx = -nx; ny = -ny;
+          }
+          const arc = Math.min(dist * 0.32, 260);
+          const cp1x = sx + dx * 0.2 + nx * arc;
+          const cp1y = sy + dy * 0.2 + ny * arc;
+          const cp2x = sx + dx * 0.8 + nx * arc;
+          const cp2y = sy + dy * 0.8 + ny * arc;
           line.setAttribute(
             "d",
-            `M ${sx} ${sy} C ${exitX} ${sy}, ${exitX} ${exitY}, ${ex} ${ey}`
+            `M ${sx} ${sy} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${ex} ${ey}`
           );
           const len = line.getTotalLength();
           const p = Math.max(0, Math.min(1, i === 0 ? prog.a : prog.b));
@@ -113,7 +126,7 @@ export default function ClickScroll() {
             head.setAttribute("cx", `${pt.x}`); head.setAttribute("cy", `${pt.y}`);
             halo.setAttribute("cx", `${pt.x}`); halo.setAttribute("cy", `${pt.y}`);
           }
-          const visible = p > 0.02 && p < 0.985;
+          const visible = p > 0.02;
           head.style.opacity = visible ? "1" : "0";
           halo.style.opacity = visible ? "0.4" : "0";
           if (p > 0.95) shape.classList.add("lit");

@@ -9,7 +9,7 @@ export default function Footer() {
   const ref = useRef<HTMLElement>(null);
   const stack = ["Figma", "Next.js", "GSAP", "Lenis", "Tailwind"];
   const links = [
-    { label: "Email", href: "mailto:camilosanchezwwe@gmail.com" },
+    { label: "Email", href: "mailto:santichill@gmail.com" },
     { label: "Linkedin", href: "https://linkedin.com" },
     { label: "X", href: "https://x.com" },
     { label: "Behance", href: "https://behance.net" },

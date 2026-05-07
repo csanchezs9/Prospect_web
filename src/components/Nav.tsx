@@ -36,7 +36,7 @@ export default function Nav() {
         <Link href="/work" className="nav-link" data-hover data-hover-text="See work">Work</Link>
       </nav>
       <ul className="hidden md:flex items-center gap-6 text-base">
-        <li><a className="nav-social-link" href="mailto:camilosanchezwwe@gmail.com">Email</a></li>
+        <li><a className="nav-social-link" href="mailto:santichill@gmail.com">Email</a></li>
         <li><a className="nav-social-link" href="https://linkedin.com" target="_blank">in</a></li>
         <li><a className="nav-social-link" href="https://x.com" target="_blank">x</a></li>
         <li><a className="nav-social-link" href="https://behance.net" target="_blank">Be</a></li>

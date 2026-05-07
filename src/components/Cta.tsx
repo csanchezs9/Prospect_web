@@ -1,41 +1,25 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 
-const EMAIL = "camilosanchezwwe@gmail.com";
+const EMAIL = "santichill@gmail.com";
 
 export default function Cta() {
-  const linkRef = useRef<HTMLAnchorElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    const link = linkRef.current;
-    if (!link) return;
-    const first = link.querySelector(".cta-icon-first") as HTMLElement;
-    const last = link.querySelector(".cta-icon-last") as HTMLElement;
+  const onClick = async () => {
+    if (copied) return;
+    try { await navigator.clipboard.writeText(EMAIL); } catch {}
+    setCopied(true);
 
-    const onIn = () => {
-      gsap.to(first, { width: "2.8rem", rotation: 0, opacity: 1, duration: 0.8, ease: "elastic.out(0.5, 0.3)", overwrite: true });
-      gsap.to(last, { width: "0rem", rotation: -90, opacity: 0, duration: 0.2, ease: "power2.out", overwrite: true });
-    };
-    const onOut = () => {
-      gsap.to(first, { width: "0rem", rotation: -90, opacity: 0, duration: 0.3, ease: "power2.inOut", overwrite: true });
-      gsap.to(last, { width: "2.8rem", rotation: 0, opacity: 1, duration: 0.8, ease: "elastic.out(0.6, 0.3)", overwrite: true });
-    };
-    link.addEventListener("mouseenter", onIn);
-    link.addEventListener("mouseleave", onOut);
-    return () => {
-      link.removeEventListener("mouseenter", onIn);
-      link.removeEventListener("mouseleave", onOut);
-    };
-  }, []);
+    gsap.fromTo(
+      btnRef.current,
+      { scale: 0.94 },
+      { scale: 1, duration: 0.6, ease: "elastic.out(1, 0.45)" }
+    );
 
-  const onClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    navigator.clipboard.writeText(EMAIL).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+    setTimeout(() => setCopied(false), 1800);
   };
 
   return (
@@ -47,18 +31,34 @@ export default function Cta() {
       </h2>
       <p className="mt-6 text-lg">desde startups hasta empresas globales.</p>
 
-      <a
-        ref={linkRef}
-        href={`mailto:${EMAIL}`}
+      <button
+        ref={btnRef}
+        type="button"
         onClick={onClick}
-        data-hover
-        data-hover-text={copied ? "copied!" : "copy email"}
-        className="cta-link inline-flex items-center mt-16 px-10 py-6 rounded-full bg-[var(--ink)] text-[var(--bg-warm)] h-display text-3xl md:text-5xl"
+        aria-label={copied ? "Email copiado" : "Copiar email"}
+        className="inline-flex items-center justify-center gap-3 mt-16 px-10 py-6 rounded-full h-display text-2xl md:text-4xl will-change-transform transition-colors duration-300 appearance-none border-0 cursor-pointer"
+        style={{
+          background: copied ? "var(--orange1)" : "var(--ink)",
+          color: copied ? "var(--ink)" : "var(--bg-warm)",
+        }}
       >
-        <span className="cta-icon-first"><img src="/shapes/arrow-grey.svg" alt="" /></span>
-        <span className="px-3">{copied ? "¡Copiado!" : "Hablemos"}</span>
-        <span className="cta-icon-last"><img src="/shapes/arrow-grey.svg" alt="" /></span>
-      </a>
+        <span className="relative w-7 h-7 inline-block">
+          <svg
+            className={`absolute inset-0 transition-all duration-300 ${copied ? "opacity-0 scale-50" : "opacity-100 scale-100"}`}
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M3 7l9 6 9-6" />
+          </svg>
+          <svg
+            className={`absolute inset-0 transition-all duration-300 ${copied ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"
+          >
+            <path d="M4 12l5 5L20 6" />
+          </svg>
+        </span>
+        <span className="leading-none">{copied ? "copied!" : "copy email"}</span>
+      </button>
     </section>
   );
 }
