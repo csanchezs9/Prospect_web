@@ -79,7 +79,6 @@ export default function Footer() {
               <span key={i} className="inline-block overflow-hidden"><span className="letter inline-block">{c}</span></span>
             ))}
           </h2>
-          <span className="w-6 h-6 rounded-full bg-[var(--orange1)] inline-block" />
           <h2 className="h-display text-[22vw] md:text-[13vw] leading-none flex text-[var(--orange1)]">
             {"Chill".split("").map((c, i) => (
               <span key={i} className="inline-block overflow-hidden"><span className="letter inline-block">{c}</span></span>
