@@ -32,9 +32,13 @@ export default function SmoothScroll() {
     window.addEventListener("orientationchange", onOrientation);
 
     if (iab) {
-      // Skip Lenis entirely → native scroll, more stable inside Instagram/FB.
+      // Skip Lenis → native scroll. Normalize scroll so ScrollTrigger stays
+      // locked to what the user actually sees (kills the URL-bar / rubber-band
+      // teleport on iOS Instagram).
+      ScrollTrigger.normalizeScroll(true);
       return () => {
         window.removeEventListener("orientationchange", onOrientation);
+        ScrollTrigger.normalizeScroll(false);
       };
     }
 

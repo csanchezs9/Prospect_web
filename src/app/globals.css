@@ -29,11 +29,20 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
+html {
+  /* Prevent in-app browsers (Instagram/iOS) from auto-adjusting scroll when
+     content above the viewport changes size — main cause of "teleport down". */
+  overflow-anchor: none;
+  /* Disable rubber-band overscroll past page edges. */
+  overscroll-behavior: none;
+}
+
 body {
   background: var(--bg-warm);
   color: var(--grey);
   font-family: var(--font-display), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 a { color: inherit; text-decoration: none; }
