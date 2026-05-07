@@ -54,6 +54,7 @@ export default function PersonalBrand() {
           start: startSep,
           end: endSep,
           scrub: 1,
+          invalidateOnRefresh: true,
         },
       });
       gsap.to(".pb-chill", {
@@ -64,6 +65,7 @@ export default function PersonalBrand() {
           start: startSep,
           end: endSep,
           scrub: 1,
+          invalidateOnRefresh: true,
         },
       });
     }, ref);
