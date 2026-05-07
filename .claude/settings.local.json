@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:juanmora.co)"
+      "WebFetch(domain:juanmora.co)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; @\\('him.png','him_contorno_aligned.png','him_no_bg.png'\\) | % { $i=[System.Drawing.Image]::FromFile\\(\"$pwd\\\\public\\\\gsap2\\\\$_\"\\); \"$_`: $\\($i.Width\\)x$\\($i.Height\\)\"; $i.Dispose\\(\\) })",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; @\\('him.png','him_contorno_aligned.png','him_no_bg.png'\\) | % { $p=\"C:\\\\Users\\\\camil\\\\OneDrive\\\\Documents\\\\Prospect_web\\\\Prospect_web\\\\public\\\\gsap2\\\\$_\"; $i=[System.Drawing.Image]::FromFile\\($p\\); \"$_`: $\\($i.Width\\)x$\\($i.Height\\)\"; $i.Dispose\\(\\) })",
+      "Bash(git commit -m 'feat\\(personal-brand\\): swap layer assets, text passes behind subject *)",
+      "Bash(git push *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }

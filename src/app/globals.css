@@ -186,12 +186,80 @@ a { color: inherit; text-decoration: none; }
   width: .32em; height: .32em; border-radius: 999px;
   background: var(--orange1);
   display: inline-block;
+  will-change: transform;
+}
+.loader-char {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Loader actual (wordmark + line + foot) */
+.loader-wordmark {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; align-items: center; gap: .5rem;
+  font-size: clamp(1.6rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--bg-warm);
+  z-index: 2;
+}
+.loader-line {
+  position: absolute;
+  left: 50%; top: 50%;
+  background: var(--orange1);
+  border-radius: 999px;
+  z-index: 1;
+}
+.loader-foot {
+  position: absolute;
+  bottom: 1.8rem; left: 1.8rem; right: 1.8rem;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--bg-warm);
+  opacity: .55;
+  z-index: 3;
+}
+.loader-foot-num {
+  display: flex; align-items: baseline; gap: .2rem;
+  font-size: 1rem; font-weight: 600; letter-spacing: .04em;
+  font-variant-numeric: tabular-nums;
 }
 
 .top-glow {
   position: absolute; top: -10%; left: 0; right: 0; height: 90vh;
   background: radial-gradient(ellipse at 50% 0%, rgba(255,188,149,.85), transparent 60%);
   filter: blur(40px); pointer-events: none; z-index: 0;
+}
+
+/* Side gradient outlines (juanmora.co vibe) — peach glow hugging viewport edges */
+.edge-glow {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  background:
+    linear-gradient(to right,
+      rgba(249,158,118,.26) 0%,
+      rgba(255,188,149,.1) 1.5%,
+      transparent 4.5%,
+      transparent 95.5%,
+      rgba(255,188,149,.1) 98.5%,
+      rgba(249,158,118,.26) 100%);
+}
+.edge-glow::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(249,158,118,.26) 0%,
+      rgba(255,188,149,.1) 1.5%,
+      transparent 4.5%,
+      transparent 95.5%,
+      rgba(255,188,149,.1) 98.5%,
+      rgba(249,158,118,.26) 100%);
 }
 
 /* Hero curve mask */
@@ -201,6 +269,16 @@ a { color: inherit; text-decoration: none; }
   background: var(--bg-warm);
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
   z-index: 5;
+}
+
+/* PersonalBrand → Cta curve mask */
+.pb-curve {
+  position: absolute; left: 0; right: 0; bottom: -1px;
+  width: 100%; height: 2.5vw;
+  background: var(--bg-grey);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  z-index: 10;
+  pointer-events: none;
 }
 
 .marquee-track {

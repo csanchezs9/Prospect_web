@@ -4,7 +4,6 @@ import Marquee from "@/components/Marquee";
 import Services from "@/components/Services";
 import WorkCta from "@/components/WorkCta";
 import PersonalBrand from "@/components/PersonalBrand";
-import About from "@/components/About";
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 
@@ -17,7 +16,6 @@ export default function Home() {
       <Services />
       <WorkCta />
       <PersonalBrand />
-      <About />
       <Cta />
       <Footer />
     </>

@@ -7,48 +7,58 @@ if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 export default function PersonalBrand() {
   const ref = useRef<HTMLElement>(null);
-  const imgRatio = 1174 / 1339;
+  const pinRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // anim on-enter solo, sin pin/sticky — imagen scrollea natural
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ref.current,
-          start: "top top",
-          end: () => `+=${(ref.current?.offsetHeight ?? 0) / 2}`,
+          start: "top 25%",
+          end: "center 15%",
           scrub: 1,
           invalidateOnRefresh: true,
         },
       });
 
       tl
-        // oscuro full fade → revela santichill
-        .fromTo(".pb-oscuro", { opacity: 1 }, { opacity: 0, ease: "none", duration: 0.55 }, 0)
-        // texto cruza de izquierda a derecha pasando por la cabeza
         .fromTo(
           ".pb-text",
           { x: "-45vw", autoAlpha: 1 },
-          { x: "40vw", autoAlpha: 1, ease: "none", duration: 0.55 },
+          { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.5 },
           0
         )
-        // texto superior cruza de derecha a izquierda por encima del sujeto
         .fromTo(
           ".pb-text-top",
           { x: "45vw", autoAlpha: 1 },
-          { x: "-40vw", autoAlpha: 1, ease: "none", duration: 0.55 },
+          { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.5 },
           0
         )
-        // mantener un momento sin salirse
-        .to(".pb-text", { x: "40vw", ease: "none", duration: 0.1 }, 0.55)
-        .to(".pb-text-top", { x: "-40vw", ease: "none", duration: 0.1 }, 0.55)
-        // fade out final para dejar continuar el scroll
-        .to([".pb-text", ".pb-text-top"], { autoAlpha: 0, ease: "none", duration: 0.1 }, 0.65)
-        // línea divisora
-        .fromTo(".pb-line-bar", { scaleX: 0 }, { scaleX: 1, ease: "none" }, 0.62)
-        // "trabaja conmigo" reveal
-        .from(".pb-trabaja .wi", { yPercent: 115, stagger: 0.07, ease: "none" }, 0.68)
-        // CTA
-        .from(".pb-cta-btn", { autoAlpha: 0, y: 14, ease: "none" }, 0.86);
+        .fromTo(".pb-oscuro", { opacity: 1 }, { opacity: 0, ease: "none", duration: 0.5 }, 0.5);
+
+      // anim corta anidada: separar Santi <-> Chill al finalizar
+      gsap.to(".pb-santi", {
+        x: "-0.6em",
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "top 5%",
+          end: "top -10%",
+          scrub: 1,
+        },
+      });
+      gsap.to(".pb-chill", {
+        x: "0.6em",
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "top 5%",
+          end: "top -10%",
+          scrub: 1,
+        },
+      });
     }, ref);
 
     return () => ctx.revert();
@@ -59,81 +69,96 @@ export default function PersonalBrand() {
       ref={ref}
       data-nav="peach"
       className="relative w-screen left-1/2 -translate-x-1/2"
-      style={{ backgroundColor: "#0a0a0a", overflow: "visible", height: `calc(100vw * ${imgRatio})` }}
+      style={{ backgroundColor: "#0a0a0a" }}
     >
-      <div className="absolute inset-0">
-        {/* z-1 — foto base */}
-        <img
-          src="/gsap2/him.png"
-          alt=""
-          aria-hidden
-          className="absolute inset-0 z-[1] w-full h-full object-contain select-none pointer-events-none"
-        />
-
-        {/* z-2 — overlay oscuro (debajo del texto para mantener opacidad constante) */}
-        <img
-          src="/gsap2/him_contorno_aligned.png"
-          alt=""
-          aria-hidden
-          className="pb-oscuro absolute inset-0 z-[2] w-full h-full object-contain pointer-events-none"
-        />
-
-        {/* z-4 — recorte de la persona (texto pasa por detras de la cabeza) */}
-        <img
-          src="/gsap2/him_no_bg_aligned.png"
-          alt=""
-          aria-hidden
-          className="absolute inset-0 z-[4] w-full h-full object-contain select-none pointer-events-none"
-        />
-      </div>
-
-      {/* texto y animaciones solo en la mitad superior */}
-      <div className="absolute inset-x-0 top-0 z-[5] h-1/2 pointer-events-none select-none">
-        {/* z-3 — texto SANTICHILL: cruza horizontalmente a la altura de la cabeza */}
+      {/* contenedor con aspect ratio nativo — scrollea natural */}
+      <div
+        ref={pinRef}
+        className="relative w-full overflow-hidden"
+      >
         <div
-          className="absolute inset-x-0 z-[3] flex justify-center"
-          style={{ top: "20%" }}
+          ref={frameRef}
+          className="relative w-full"
+          style={{ height: "calc(100vw * 1403 / 1600)" }}
         >
-          <div className="pb-text" style={{ whiteSpace: "nowrap" }}>
-            <span
-              style={{
-                fontSize: "clamp(5rem, 17vw, 16rem)",
-                letterSpacing: "-0.045em",
-                color: "#ffbc95",
-                fontWeight: 900,
-                lineHeight: 1,
-                textShadow: "0 0 100px rgba(255,188,149,0.22)",
-                display: "inline-block",
-              }}
+          {/* z-1 base brillante */}
+          <img
+            src="/gsap3/normal.png"
+            alt=""
+            aria-hidden
+            className="absolute inset-0 z-[1] w-full h-full select-none pointer-events-none"
+          />
+          {/* z-2 overlay oscuro — fade out reveal */}
+          <img
+            src="/gsap3/opacidad_negra.png"
+            alt=""
+            aria-hidden
+            className="pb-oscuro absolute inset-0 z-[2] w-full h-full pointer-events-none"
+          />
+          {/* z-4 recorte persona — Santi Chill (z-3) pasa por detras, Creador Digital (z-6) por delante */}
+          <img
+            src="/gsap3/no_bg.png"
+            alt=""
+            aria-hidden
+            className="absolute inset-0 z-[4] w-full h-full select-none pointer-events-none"
+          />
+          {/* texto centrado en imagen */}
+          <div className="absolute inset-0 pointer-events-none select-none">
+            <div
+              className="absolute inset-x-0 z-[3] flex justify-center"
+              style={{ top: "32%" }}
             >
-              SANTICHILL
-            </span>
-          </div>
-        </div>
+              <div
+                className="pb-text"
+                style={{ whiteSpace: "nowrap", willChange: "transform" }}
+              >
+                <span
+                  className="h-display"
+                  style={{
+                    fontSize: "clamp(6rem, 20.4vw, 19.2rem)",
+                    letterSpacing: "-0.04em",
+                    color: "#ffbc95",
+                    fontWeight: 500,
+                    lineHeight: 0.92,
+                    display: "inline-flex",
+                    gap: "0.25em",
+                  }}
+                >
+                  <span className="pb-santi inline-block">Santi</span>
+                  <span className="pb-chill inline-block">Chill</span>
+                </span>
+              </div>
+            </div>
 
-        {/* z-5 — texto superior: siempre encima del sujeto */}
-        <div
-          className="absolute inset-x-0 z-[5] flex justify-center"
-          style={{ top: "72%" }}
-        >
-          <div className="pb-text-top" style={{ whiteSpace: "nowrap" }}>
-            <span
-              style={{
-                fontSize: "clamp(2.8rem, 10vw, 8.5rem)",
-                letterSpacing: "-0.03em",
-                color: "#ffbc95",
-                fontWeight: 700,
-                lineHeight: 1,
-                textShadow: "0 0 80px rgba(255,188,149,0.18)",
-                display: "inline-block",
-              }}
+            <div
+              className="absolute inset-x-0 z-[6] flex justify-center"
+              style={{ top: "48%" }}
             >
-              CREADOR DIGITAL
-            </span>
+              <div
+                className="pb-text-top"
+                style={{ whiteSpace: "nowrap", willChange: "transform" }}
+              >
+                <span
+                  className="h-display"
+                  style={{
+                    fontSize: "clamp(6rem, 20.4vw, 19.2rem)",
+                    letterSpacing: "-0.04em",
+                    color: "#ffbc95",
+                    fontWeight: 500,
+                    lineHeight: 0.92,
+                    display: "inline-block",
+                  }}
+                >
+                  Creador Digital
+                </span>
+              </div>
+            </div>
           </div>
+
+          {/* Curve mask — sits at bottom of frame (pies). Only visible when reveal completes. */}
+          <div className="pb-curve" />
         </div>
       </div>
-
     </section>
   );
 }
