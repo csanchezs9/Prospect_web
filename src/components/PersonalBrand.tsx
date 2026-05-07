@@ -14,10 +14,10 @@ export default function PersonalBrand() {
     const ctx = gsap.context(() => {
       // start 28% antes en mobile (responsive)
       const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
-      const startMain = isMobile ? "top 66%" : "top 38%";
-      const endMain = isMobile ? "center 56%" : "center 28%";
-      const startSep = isMobile ? "top 33%" : "top 5%";
-      const endSep = isMobile ? "top 18%" : "top -10%";
+      const startMain = isMobile ? "top 51%" : "top 23%";
+      const endMain = isMobile ? "center 41%" : "center 13%";
+      const startSep = isMobile ? "top 18%" : "top -10%";
+      const endSep = isMobile ? "top 3%" : "top -25%";
 
       // anim on-enter solo, sin pin/sticky — imagen scrollea natural
       const tl = gsap.timeline({
