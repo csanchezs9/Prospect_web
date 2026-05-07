@@ -13,6 +13,7 @@ export default function Loader() {
   const wordmark = useRef<HTMLDivElement>(null);
   const counter = useRef<HTMLSpanElement>(null);
   const foot = useRef<HTMLDivElement>(null);
+  const paint = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const c = { v: 0 };
@@ -23,6 +24,21 @@ export default function Loader() {
     const stopBounce = () => {
       chars.forEach((el) => el.classList.add("is-stopped"));
       wordmark.current?.querySelector(".loader-name-dot")?.classList.add("is-stopped");
+    };
+
+    const positionPaint = () => {
+      const dotEl = wordmark.current?.querySelector<HTMLElement>(".loader-name-dot");
+      const p = paint.current;
+      if (!dotEl || !p) return { cx: window.innerWidth / 2, cy: window.innerHeight / 2, r: 0 };
+      const r = dotEl.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const radius = Math.max(r.width, r.height) / 2;
+      const startCp = `circle(${radius}px at ${cx}px ${cy}px)`;
+      p.style.clipPath = startCp;
+      (p.style as CSSStyleDeclaration & { webkitClipPath?: string }).webkitClipPath = startCp;
+      p.style.opacity = "1";
+      return { cx, cy, r: radius };
     };
 
     const tl = gsap.timeline();
@@ -37,11 +53,24 @@ export default function Loader() {
     }, 0.2)
       .add(stopBounce, 1.55)
       .to(".loader-text, .loader-foot", { autoAlpha: 0, duration: 0.35, ease: "power2.out" }, 1.6)
-      .to(
-        ".loader-name-dot",
-        { scale: 220, duration: 1.0, ease: "expo.inOut", transformOrigin: "50% 50%" },
-        1.7
-      )
+      .add(() => {
+        const { cx, cy, r } = positionPaint();
+        const maxR = Math.hypot(
+          Math.max(cx, window.innerWidth - cx),
+          Math.max(cy, window.innerHeight - cy)
+        ) * 1.05;
+        gsap.set(".loader-name-dot", { autoAlpha: 0 });
+        gsap.fromTo(
+          paint.current,
+          { clipPath: `circle(${r}px at ${cx}px ${cy}px)`, webkitClipPath: `circle(${r}px at ${cx}px ${cy}px)` },
+          {
+            clipPath: `circle(${maxR}px at ${cx}px ${cy}px)`,
+            webkitClipPath: `circle(${maxR}px at ${cx}px ${cy}px)`,
+            duration: 1.0,
+            ease: "expo.inOut",
+          }
+        );
+      }, 1.7)
       .to(overlay.current, { yPercent: -100, duration: 1.0, ease: "expo.inOut" }, 2.55)
       .set(overlay.current, { display: "none" });
   }, []);
@@ -61,6 +90,7 @@ export default function Loader() {
           ))}
         </span>
       </div>
+      <div ref={paint} className="loader-paint" />
       <div ref={foot} className="loader-foot">
         <span className="loader-foot-tag">Personal Brand Strategist</span>
         <span className="loader-foot-num">

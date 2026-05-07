@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Nav() {
+  const headerRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const sections = document.querySelectorAll<HTMLElement>("[data-nav]");
     const els = document.querySelectorAll(".nav-link, .nav-name-jm, .nav-social-link");
@@ -24,8 +26,41 @@ export default function Nav() {
     return () => obs.disconnect();
   }, []);
 
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    let lastY = window.scrollY;
+    let ticking = false;
+    const THRESHOLD = 8;
+    const TOP_OFFSET = 80;
+
+    const update = () => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+      if (y < TOP_OFFSET) {
+        el.classList.remove("nav-hidden");
+      } else if (delta > THRESHOLD) {
+        el.classList.add("nav-hidden");
+      } else if (delta < -THRESHOLD) {
+        el.classList.remove("nav-hidden");
+      }
+      lastY = y;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-7 flex items-center justify-between text-lg">
+    <header ref={headerRef} className="nav-header fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-7 flex items-center justify-between text-lg">
       <Link href="/" className="flex items-baseline gap-2.5 font-medium tracking-tight text-xl">
         <span className="nav-name-jm">Santi</span>
         <span className="w-2.5 h-2.5 rounded-full bg-[var(--orange1)] inline-block translate-y-[-2px]" />
