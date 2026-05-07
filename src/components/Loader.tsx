@@ -20,17 +20,9 @@ export default function Loader() {
     const chars = Array.from(
       wordmark.current?.querySelectorAll<HTMLSpanElement>(".loader-char") ?? []
     );
-    // CSS-driven hop (more reliable across HMR + paint scheduling)
-    chars.forEach((el, i) => {
-      el.style.display = "inline-block";
-      el.style.willChange = "transform";
-      el.style.animation = `loaderHop 0.9s ease-in-out ${i * 0.08}s infinite`;
-    });
     const stopBounce = () => {
-      chars.forEach((el) => {
-        el.style.animation = "none";
-        el.style.transform = "translateY(0)";
-      });
+      chars.forEach((el) => el.classList.add("is-stopped"));
+      wordmark.current?.querySelector(".loader-name-dot")?.classList.add("is-stopped");
     };
 
     const tl = gsap.timeline();

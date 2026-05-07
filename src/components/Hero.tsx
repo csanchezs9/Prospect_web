@@ -10,13 +10,6 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".hero-line .word", {
-        yPercent: 110,
-        duration: 1.4,
-        ease: "expo.out",
-        stagger: 0.05,
-        delay: 1.6,
-      });
       gsap.from(".hero-tag", { autoAlpha: 0, y: 20, delay: 2.2, duration: 0.8 });
       gsap.from(".hero-curve", { scaleY: 0, transformOrigin: "bottom center", duration: 1.4, ease: "expo.out", delay: 2.0 });
 
@@ -46,8 +39,8 @@ export default function Hero() {
 
       <div className="hero-content space-y-2 relative z-10">
         <div className="hero-tag flex items-end justify-between pt-6">
-          <p className="text-sm md:text-base text-white/90">Mentor &amp; Director Creativo</p>
-          <p className="text-sm md:text-base text-right text-white/90">2026</p>
+          <p className="text-base md:text-xl text-white/90">Mentor &amp; Director Creativo</p>
+          <p className="text-base md:text-xl text-right text-white/90">2026</p>
         </div>
       </div>
 

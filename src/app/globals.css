@@ -187,10 +187,35 @@ a { color: inherit; text-decoration: none; }
   background: var(--orange1);
   display: inline-block;
   will-change: transform;
+  animation: loaderHop 0.9s ease-in-out 0.36s infinite;
+}
+.loader-name-dot.is-stopped {
+  animation: none;
+  transform: translateY(0);
 }
 .loader-char {
   display: inline-block;
   will-change: transform;
+  animation: loaderHop 0.9s ease-in-out infinite;
+}
+.loader-char.is-stopped {
+  animation: none;
+  transform: translateY(0);
+}
+.loader-text .loader-char:nth-child(1) { animation-delay: 0.00s; }
+.loader-text .loader-char:nth-child(2) { animation-delay: 0.08s; }
+.loader-text .loader-char:nth-child(3) { animation-delay: 0.16s; }
+.loader-text .loader-char:nth-child(4) { animation-delay: 0.24s; }
+.loader-text .loader-char:nth-child(5) { animation-delay: 0.32s; }
+.loader-text + .loader-name-dot + .loader-text .loader-char:nth-child(1) { animation-delay: 0.40s; }
+.loader-text + .loader-name-dot + .loader-text .loader-char:nth-child(2) { animation-delay: 0.48s; }
+.loader-text + .loader-name-dot + .loader-text .loader-char:nth-child(3) { animation-delay: 0.56s; }
+.loader-text + .loader-name-dot + .loader-text .loader-char:nth-child(4) { animation-delay: 0.64s; }
+.loader-text + .loader-name-dot + .loader-text .loader-char:nth-child(5) { animation-delay: 0.72s; }
+@keyframes loaderHop {
+  0%, 100% { transform: translateY(0); }
+  35%      { transform: translateY(-0.5em); }
+  70%      { transform: translateY(0); }
 }
 
 /* Loader actual (wordmark + line + foot) */
@@ -227,6 +252,113 @@ a { color: inherit; text-decoration: none; }
   display: flex; align-items: baseline; gap: .2rem;
   font-size: 1rem; font-weight: 600; letter-spacing: .04em;
   font-variant-numeric: tabular-nums;
+}
+
+/* WorkCta — iPad mockup pure-CSS, video adentro */
+.ipad-frame {
+  position: relative;
+  display: block;
+  width: min(70vw, 70vw);
+  max-width: 1100px;
+  aspect-ratio: 10 / 7;
+  padding: clamp(14px, 1.6vw, 26px);
+  background: linear-gradient(145deg, #1f1f23 0%, #2c2c30 50%, #15151a 100%);
+  border-radius: clamp(22px, 2.2vw, 38px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06) inset,
+    0 0 0 1.5px rgba(0,0,0,0.7),
+    0 0 0 2.5px rgba(255,255,255,0.04),
+    0 60px 120px -30px rgba(0,0,0,0.5),
+    0 30px 60px -25px rgba(255,158,118,0.25);
+  transition: transform .8s cubic-bezier(.2,.7,.2,1), box-shadow .8s cubic-bezier(.2,.7,.2,1);
+  isolation: isolate;
+}
+.ipad-frame:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.08) inset,
+    0 0 0 1.5px rgba(0,0,0,0.7),
+    0 0 0 2.5px rgba(255,255,255,0.06),
+    0 80px 140px -30px rgba(0,0,0,0.55),
+    0 40px 80px -25px rgba(255,158,118,0.35);
+}
+.ipad-camera {
+  position: absolute;
+  top: clamp(6px, 0.7vw, 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(5px, 0.45vw, 8px);
+  height: clamp(5px, 0.45vw, 8px);
+  border-radius: 999px;
+  background: #0a0a0a;
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,0.08), inset 0 0 2px rgba(120,160,255,0.4);
+  z-index: 4;
+}
+.ipad-screen {
+  position: relative;
+  width: 100%; height: 100%;
+  border-radius: clamp(8px, 1vw, 16px);
+  overflow: hidden;
+  background: #000;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+.ipad-screen-btn {
+  display: block;
+  border: 0; padding: 0; margin: 0;
+  cursor: pointer;
+  background: #000;
+}
+.ipad-playicon {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+  width: 4.5rem; height: 4.5rem;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 1.4rem;
+  letter-spacing: 0;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;
+}
+.ipad-screen-btn:hover .ipad-playicon,
+.ipad-playicon.is-paused {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.ipad-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.ipad-badge {
+  position: absolute;
+  bottom: 14px; left: 14px;
+  z-index: 3;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .4rem .8rem;
+  border-radius: 999px;
+  background: rgba(250,246,239,0.92);
+  backdrop-filter: blur(6px);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 600;
+}
+.ipad-badge-dot {
+  width: .5rem; height: .5rem; border-radius: 999px;
+  background: var(--orange2);
+  box-shadow: 0 0 0 4px rgba(249,158,118,0.25);
+  animation: workPulse 1.6s ease-in-out infinite;
+}
+@keyframes workPulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50%     { transform: scale(1.25); opacity: .75; }
 }
 
 .top-glow {
