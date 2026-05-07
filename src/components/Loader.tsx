@@ -4,20 +4,35 @@ import gsap from "gsap";
 
 /**
  * Minimal loader inspired by juanmora.co.
- * - Cream overlay, small centered wordmark, thin vertical peach line that grows.
- * - Tiny live counter to give signal of progress.
- * - Line expands to fill, overlay slides up off screen.
+ * - Cream overlay, small centered wordmark with peach dot between "Santi" and "Chill".
+ * - Tiny live counter for progress signal.
+ * - Dot expands to paint the screen, overlay slides up off screen.
  */
 export default function Loader() {
   const overlay = useRef<HTMLDivElement>(null);
-  const line = useRef<HTMLDivElement>(null);
   const wordmark = useRef<HTMLDivElement>(null);
   const counter = useRef<HTMLSpanElement>(null);
+  const foot = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    gsap.set(line.current, { xPercent: -50, yPercent: -50 });
-
     const c = { v: 0 };
+
+    const chars = Array.from(
+      wordmark.current?.querySelectorAll<HTMLSpanElement>(".loader-char") ?? []
+    );
+    // CSS-driven hop (more reliable across HMR + paint scheduling)
+    chars.forEach((el, i) => {
+      el.style.display = "inline-block";
+      el.style.willChange = "transform";
+      el.style.animation = `loaderHop 0.9s ease-in-out ${i * 0.08}s infinite`;
+    });
+    const stopBounce = () => {
+      chars.forEach((el) => {
+        el.style.animation = "none";
+        el.style.transform = "translateY(0)";
+      });
+    };
+
     const tl = gsap.timeline();
 
     tl.to(c, {
@@ -28,27 +43,33 @@ export default function Loader() {
         if (counter.current) counter.current.textContent = String(Math.floor(c.v)).padStart(3, "0");
       },
     }, 0.2)
-      .fromTo(
-        line.current,
-        { height: "0%", width: "1px" },
-        { height: "55%", duration: 1.6, ease: "power3.inOut" },
-        0.2
+      .add(stopBounce, 1.55)
+      .to(".loader-text, .loader-foot", { autoAlpha: 0, duration: 0.35, ease: "power2.out" }, 1.6)
+      .to(
+        ".loader-name-dot",
+        { scale: 220, duration: 1.0, ease: "expo.inOut", transformOrigin: "50% 50%" },
+        1.7
       )
-      .to(wordmark.current, { autoAlpha: 0, duration: 0.4, ease: "power2.out" }, 1.6)
-      .to(line.current, { autoAlpha: 0, duration: 0.3 }, 1.7)
-      .to(overlay.current, { yPercent: -100, duration: 1.0, ease: "expo.inOut" }, 1.9)
+      .to(overlay.current, { yPercent: -100, duration: 1.0, ease: "expo.inOut" }, 2.55)
       .set(overlay.current, { display: "none" });
   }, []);
 
   return (
     <div ref={overlay} className="loader-root">
       <div ref={wordmark} className="loader-wordmark">
-        <span>Santi</span>
+        <span className="loader-text">
+          {"Santi".split("").map((ch, i) => (
+            <span key={`s-${i}`} className="loader-char">{ch}</span>
+          ))}
+        </span>
         <span className="loader-name-dot" />
-        <span>Chill</span>
+        <span className="loader-text">
+          {"Chill".split("").map((ch, i) => (
+            <span key={`c-${i}`} className="loader-char">{ch}</span>
+          ))}
+        </span>
       </div>
-      <div ref={line} className="loader-line" />
-      <div className="loader-foot">
+      <div ref={foot} className="loader-foot">
         <span className="loader-foot-tag">Personal Brand Strategist</span>
         <span className="loader-foot-num">
           <span ref={counter}>000</span>
