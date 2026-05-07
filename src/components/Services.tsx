@@ -30,10 +30,10 @@ const services = [
     title: "Autoridad & Posicionamiento",
     body: "Te conviertes en referente obligado de tu nicho.",
     tiles: [
-      { type: "color", v: "#e8e9ef" },
-      { type: "shape", v: "/shapes/big-hexagon-scroll1.png", bg: "#ffbc95" },
-      { type: "color", v: "#f99e76" },
-      { type: "shape", v: "/shapes/big-circle-scroll1.png", bg: "#2e54fe" },
+      { type: "photo", v: "/autoridadimg/IMG_1576.PNG", bg: "#faf6ef" },
+      { type: "photo", v: "/autoridadimg/IMG_1577.PNG", bg: "#faf6ef" },
+      { type: "photo", v: "/autoridadimg/IMG_1578.PNG", bg: "#faf6ef" },
+      { type: "photo", v: "/autoridadimg/IMG_1579.PNG", bg: "#faf6ef" },
     ],
   },
 ];
