@@ -32,7 +32,7 @@ export default function RootLayout({
         <Loader />
         <SmoothScroll />
         <Nav />
-        {children}
+        <div id="scroll-wrapper">{children}</div>
         <div className="edge-glow" aria-hidden />
 
       </body>

@@ -30,10 +30,7 @@
 html, body { margin: 0; padding: 0; }
 
 html {
-  /* Prevent in-app browsers (Instagram/iOS) from auto-adjusting scroll when
-     content above the viewport changes size — main cause of "teleport down". */
   overflow-anchor: none;
-  /* Disable rubber-band overscroll past page edges. */
   overscroll-behavior: none;
 }
 
@@ -43,6 +40,27 @@ body {
   font-family: var(--font-display), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
   overscroll-behavior: none;
+}
+
+/* In-app browser scroll lock: html doesn't scroll, #scroll-wrapper does.
+   This prevents Instagram/Facebook IAB from showing/hiding its top chrome on
+   scroll up — the chrome only toggles when window scroll changes, and here
+   window scroll is fixed at 0. */
+html.iab,
+html.iab body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  inset: 0;
+}
+html.iab #scroll-wrapper {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  z-index: 0;
 }
 
 a { color: inherit; text-decoration: none; }

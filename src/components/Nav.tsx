@@ -2,14 +2,33 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
+const getScroller = (): HTMLElement | Window => {
+  if (typeof document === "undefined") return window;
+  if (document.documentElement.classList.contains("iab")) {
+    return document.getElementById("scroll-wrapper") ?? window;
+  }
+  return window;
+};
+
+const getScrollY = (): number => {
+  const s = getScroller();
+  return s instanceof Window ? s.scrollY : s.scrollTop;
+};
+
 export default function Nav() {
   const headerRef = useRef<HTMLElement>(null);
 
   const scrollToServices = () => {
     const target = document.getElementById("services");
     if (!target) return;
-    const top = target.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top, behavior: "smooth" });
+    const scroller = getScroller();
+    const currentY = getScrollY();
+    const top = target.getBoundingClientRect().top + currentY - 80;
+    if (scroller instanceof Window) {
+      scroller.scrollTo({ top, behavior: "smooth" });
+    } else {
+      scroller.scrollTo({ top, behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
@@ -36,13 +55,14 @@ export default function Nav() {
   useEffect(() => {
     const el = headerRef.current;
     if (!el) return;
-    let lastY = window.scrollY;
+    const scroller = getScroller();
+    let lastY = getScrollY();
     let ticking = false;
     const THRESHOLD = 8;
     const TOP_OFFSET = 80;
 
     const update = () => {
-      const y = window.scrollY;
+      const y = getScrollY();
       const delta = y - lastY;
       if (y < TOP_OFFSET) {
         el.classList.remove("nav-hidden");
@@ -62,8 +82,8 @@ export default function Nav() {
       }
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    scroller.addEventListener("scroll", onScroll, { passive: true });
+    return () => scroller.removeEventListener("scroll", onScroll);
   }, []);
 
   return (

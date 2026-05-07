@@ -1,14 +1,15 @@
 "use client";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
-// Detect in-app browsers (Instagram, Facebook, TikTok, Line) — they resize the
-// viewport when their chrome shows/hides which makes scrubbed ScrollTriggers
-// jump. We disable smooth scroll there and fall back to native scroll.
+// Detect in-app browsers (Instagram, Facebook, TikTok, Line). Their top chrome
+// shows/hides on scroll which resizes the viewport and makes the page
+// auto-scroll ("teleport"). Inside IAB we lock root scroll and let the inner
+// #scroll-wrapper own the scroll: window stays at 0 so chrome never toggles.
 const isInAppBrowser = () => {
   if (typeof navigator === "undefined") return false;
   const ua = navigator.userAgent || (navigator as Navigator & { vendor?: string }).vendor || "";
@@ -16,27 +17,29 @@ const isInAppBrowser = () => {
 };
 
 export default function SmoothScroll() {
-  useEffect(() => {
-    // Ignore the small height-only viewport changes caused by mobile browser
-    // chrome (URL bar collapse/expand). ScrollTrigger still refreshes on real
-    // width changes / orientation flips.
+  // useLayoutEffect runs synchronously before paint AND before deeper page
+  // effects, so ScrollTrigger.defaults({ scroller }) is set before children
+  // (Hero, ClickScroll, PersonalBrand, ...) create their triggers.
+  useLayoutEffect(() => {
     ScrollTrigger.config({ ignoreMobileResize: true });
 
     const iab = isInAppBrowser();
 
-    // Refresh ScrollTrigger only on orientation change (not on every URL-bar
-    // resize). Helps Instagram IAB stop "teleporting".
     const onOrientation = () => {
       ScrollTrigger.refresh();
     };
     window.addEventListener("orientationchange", onOrientation);
 
     if (iab) {
-      // Native scroll only — keeps iOS momentum/physics. Do NOT use
-      // ScrollTrigger.normalizeScroll here: it disables touch momentum and
-      // tanks FPS inside Instagram/Facebook in-app browsers.
+      const wrapper = document.getElementById("scroll-wrapper");
+      document.documentElement.classList.add("iab");
+      if (wrapper) {
+        ScrollTrigger.defaults({ scroller: wrapper });
+      }
       return () => {
         window.removeEventListener("orientationchange", onOrientation);
+        document.documentElement.classList.remove("iab");
+        ScrollTrigger.defaults({ scroller: undefined });
       };
     }
 
