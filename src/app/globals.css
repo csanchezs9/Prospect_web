@@ -455,22 +455,23 @@ a { color: inherit; text-decoration: none; }
 }
 
 .marquee-track {
-  display: flex; white-space: nowrap;
-  animation: marq 14s linear infinite;
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: marq 18s linear infinite;
   will-change: transform;
   transform: translate3d(0,0,0);
 }
 .marquee-set {
   display: flex;
   flex-shrink: 0;
-  gap: 4rem;
-  padding-right: 4rem;
   align-items: center;
 }
 .marquee-item {
   display: inline-flex;
   align-items: center;
   gap: 3rem;
+  margin-right: 4rem;
   flex-shrink: 0;
 }
 .marquee-dot {
@@ -481,9 +482,8 @@ a { color: inherit; text-decoration: none; }
   flex-shrink: 0;
 }
 @media (max-width: 768px) {
-  .marquee-set { gap: 2.5rem; padding-right: 2.5rem; }
-  .marquee-item { gap: 2rem; }
-  .marquee-track { animation-duration: 9s; }
+  .marquee-item { gap: 2rem; margin-right: 2.5rem; }
+  .marquee-track { animation-duration: 11s; }
 }
 @keyframes marq {
   from { transform: translate3d(0,0,0); }
