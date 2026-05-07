@@ -5,6 +5,13 @@ import { useEffect, useRef } from "react";
 export default function Nav() {
   const headerRef = useRef<HTMLElement>(null);
 
+  const scrollToServices = () => {
+    const target = document.getElementById("services");
+    if (!target) return;
+    const top = target.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
   useEffect(() => {
     const sections = document.querySelectorAll<HTMLElement>("[data-nav]");
     const els = document.querySelectorAll(".nav-link, .nav-name-jm, .nav-social-link");
@@ -67,8 +74,8 @@ export default function Nav() {
         <span className="nav-name-jm">Chill </span>
       </Link>
       <nav className="hidden md:flex items-center gap-10 text-base">
-        <Link href="/about" className="nav-link" data-hover data-hover-text="About me">About</Link>
-        <Link href="/work" className="nav-link" data-hover data-hover-text="See work">Work</Link>
+        <button type="button" onClick={scrollToServices} className="nav-link cursor-pointer" data-hover data-hover-text="Servicios">About</button>
+        <button type="button" onClick={scrollToServices} className="nav-link cursor-pointer" data-hover data-hover-text="Servicios">Work</button>
       </nav>
       <ul className="hidden md:flex items-center gap-6 text-base">
         <li><a className="nav-social-link" href="mailto:santichill@gmail.com">Email</a></li>

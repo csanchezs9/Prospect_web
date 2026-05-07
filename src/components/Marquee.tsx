@@ -11,7 +11,7 @@ export default function Marquee({ items }: { items: string[] }) {
   );
 
   return (
-    <div className="overflow-hidden py-6 border-y border-[var(--grey)]/20 bg-[var(--bg-warm)]">
+    <div className="overflow-hidden py-3 md:py-6 border-y border-[var(--grey)]/20 bg-[var(--bg-warm)]">
       <div className="marquee-track h-display text-5xl md:text-7xl text-[var(--ink)]">
         {renderSet("a")}
         {renderSet("b")}

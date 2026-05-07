@@ -85,7 +85,7 @@ export default function Services() {
   }, []);
 
   return (
-    <section ref={ref} data-nav="grey" className="bg-[var(--bg-warm)] px-6 md:px-10 py-32 space-y-24">
+    <section id="services" ref={ref} data-nav="grey" className="bg-[var(--bg-warm)] px-6 md:px-10 py-14 md:py-32 space-y-12 md:space-y-24">
       <div className="srv-head text-center">
         <p className="srv-tag text-xs uppercase tracking-widest text-[var(--orange2)] mb-4">Personal Brand Strategist</p>
         <h2 className="srv-h h-display text-[12vw] md:text-[7vw] leading-[1.05] flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.05em]">
@@ -97,7 +97,7 @@ export default function Services() {
         </h2>
       </div>
 
-      <ul className="space-y-32">
+      <ul className="space-y-16 md:space-y-32">
         {services.map((s, i) => (
           <li key={i} className="service-row grid md:grid-cols-12 gap-8 border-t border-[var(--grey)]/30 pt-10">
             <div className="md:col-span-4 space-y-3 md:sticky md:top-32 self-start">
