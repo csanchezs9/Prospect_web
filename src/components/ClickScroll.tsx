@@ -154,9 +154,9 @@ export default function ClickScroll() {
       ref={ref}
       data-nav="grey"
       className="relative bg-white"
-      style={{ height: "150vh" }}
+      style={{ height: "150svh" }}
     >
-      <div ref={pinRef} className="sticky top-0 h-screen overflow-hidden">
+      <div ref={pinRef} className="sticky top-0 h-svh overflow-hidden">
         {/* SVG líneas clean — debajo del texto */}
         <svg className="absolute inset-0 w-full h-full z-[6] pointer-events-none" fill="none" aria-hidden style={{ opacity: 0.75 }}>
           <defs>

@@ -122,8 +122,8 @@ export default function About() {
       <div className="light-jm absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,rgba(255,236,220,.6)_0%,transparent_70%)] pointer-events-none" />
 
       {/* ============ STEP 2 (sticky scrub) ============ */}
-      <div className="step2-wrap relative md:h-[240vh]">
-       <div className="step2 relative md:sticky md:top-0 md:h-screen md:overflow-hidden px-6 md:px-12 py-24 flex flex-col justify-center">
+      <div className="step2-wrap relative md:h-[240svh]">
+       <div className="step2 relative md:sticky md:top-0 md:h-svh md:overflow-hidden px-6 md:px-12 py-24 flex flex-col justify-center">
         <div className="max-w-[1400px] mx-auto w-full grid md:grid-cols-12 gap-10 items-start">
           {/* Headline 2 lineas */}
           <div className="md:col-span-6 space-y-2">
