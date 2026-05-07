@@ -104,15 +104,23 @@ export default function ClickScroll() {
           const dist = Math.hypot(dx, dy) || 1;
           let nx = -dy / dist;
           let ny = dx / dist;
-          // forzar perpendicular que apunte hacia el lado del shape (outward de text)
-          if ((dx >= 0 && nx < 0) || (dx < 0 && nx > 0)) {
-            nx = -nx; ny = -ny;
-          }
-          const arc = Math.min(dist * 0.32, 260);
-          const cp1x = sx + dx * 0.2 + nx * arc;
-          const cp1y = sy + dy * 0.2 + ny * arc;
-          const cp2x = sx + dx * 0.8 + nx * arc;
-          const cp2y = sy + dy * 0.8 + ny * arc;
+          // bow siempre hacia abajo (smile under): mas natural, evita cruce con text superior
+          if (ny < 0) { nx = -nx; ny = -ny; }
+          // arc magnitude: garantiza que bow sea grande enough para librar el text
+          // en mobile (donde headline ocupa casi todo el viewport)
+          const headlineSize = Math.max(hRight - hLeft, hBottom - hTop);
+          const arc = Math.min(
+            Math.max(dist * 0.32, headlineSize * 0.28),
+            340
+          );
+          const W = pinRect.width;
+          const H = pinRect.height;
+          const clampX = (v: number) => Math.max(8, Math.min(W - 8, v));
+          const clampY = (v: number) => Math.max(8, Math.min(H - 8, v));
+          const cp1x = clampX(sx + dx * 0.2 + nx * arc);
+          const cp1y = clampY(sy + dy * 0.2 + ny * arc);
+          const cp2x = clampX(sx + dx * 0.8 + nx * arc);
+          const cp2y = clampY(sy + dy * 0.8 + ny * arc);
           line.setAttribute(
             "d",
             `M ${sx} ${sy} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${ex} ${ey}`
