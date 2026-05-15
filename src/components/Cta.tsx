@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import gsap from "gsap";
 
-const EMAIL = "santichill@gmail.com";
+const EMAIL = "ronlach@gmail.com";
 
 export default function Cta() {
   const btnRef = useRef<HTMLButtonElement>(null);

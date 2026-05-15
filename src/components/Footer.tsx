@@ -9,7 +9,7 @@ export default function Footer() {
   const ref = useRef<HTMLElement>(null);
   const stack = ["Figma", "Next.js", "GSAP", "Lenis", "Tailwind"];
   const links = [
-    { label: "Email", href: "mailto:santichill@gmail.com" },
+    { label: "Email", href: "mailto:ronlach@gmail.com" },
     { label: "Linkedin", href: "https://linkedin.com" },
     { label: "X", href: "https://x.com" },
     { label: "Behance", href: "https://behance.net" },
@@ -75,19 +75,19 @@ export default function Footer() {
         </div>
         <div className="f-name flex items-baseline justify-between pt-8">
           <h2 className="h-display text-[22vw] md:text-[13vw] leading-none flex text-[var(--orange1)]">
-            {"Santi".split("").map((c, i) => (
+            {"Ron".split("").map((c, i) => (
               <span key={i} className="inline-block overflow-hidden"><span className="letter inline-block">{c}</span></span>
             ))}
           </h2>
           <h2 className="h-display text-[22vw] md:text-[13vw] leading-none flex text-[var(--orange1)]">
-            {"Chill".split("").map((c, i) => (
+            {"Lach".split("").map((c, i) => (
               <span key={i} className="inline-block overflow-hidden"><span className="letter inline-block">{c}</span></span>
             ))}
           </h2>
         </div>
         <div className="flex flex-col md:flex-row justify-between text-sm opacity-80">
           <span>Freelance Design Director · 2026</span>
-          <span>Santi Chill Studio · [Coming Soon]</span>
+          <span>Ron Lach Studio · [Coming Soon]</span>
         </div>
       </div>
     </footer>

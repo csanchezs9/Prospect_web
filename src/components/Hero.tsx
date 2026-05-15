@@ -32,7 +32,7 @@ export default function Hero() {
       {/* Hero bg image */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/brand/hero.png')" }}
+        style={{ backgroundImage: "url('/brand/hero.webp')" }}
       />
       {/* Dark overlay para legibilidad del texto */}
       <div className="absolute inset-0 z-[1] bg-black/40" />

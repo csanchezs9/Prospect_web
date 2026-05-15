@@ -18,8 +18,8 @@ if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
  * Líneas se reconstruyen cada frame con rects vivos (L anchor + shape rect).
  */
 const TARGETS = [
-  { src: "/shapes/big-circle-scroll1.png", className: "left-[4vw] bottom-[6vh] w-[24vw] max-w-[380px]" },
-  { src: "/shapes/big-circle-scroll3.png", className: "right-[4vw] top-[6vh] w-[24vw] max-w-[380px]" },
+  { src: "/shapes/big-circle-scroll1.webp", className: "left-[4vw] bottom-[6vh] w-[24vw] max-w-[380px]" },
+  { src: "/shapes/big-circle-scroll3.webp", className: "right-[4vw] top-[6vh] w-[24vw] max-w-[380px]" },
 ];
 
 export default function ClickScroll() {

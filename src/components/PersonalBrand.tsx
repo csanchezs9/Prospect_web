@@ -45,8 +45,8 @@ export default function PersonalBrand() {
         )
         .fromTo(".pb-oscuro", { opacity: 1 }, { opacity: 0, ease: "none", duration: 0.5 }, 0.5);
 
-      // anim corta anidada: separar Santi <-> Chill al finalizar
-      gsap.to(".pb-santi", {
+      // anim corta anidada: separar Ron <-> Lach al finalizar
+      gsap.to(".pb-ron", {
         x: "-0.6em",
         ease: "expo.out",
         scrollTrigger: {
@@ -57,7 +57,7 @@ export default function PersonalBrand() {
           invalidateOnRefresh: true,
         },
       });
-      gsap.to(".pb-chill", {
+      gsap.to(".pb-lach", {
         x: "0.6em",
         ease: "expo.out",
         scrollTrigger: {
@@ -92,21 +92,21 @@ export default function PersonalBrand() {
         >
           {/* z-1 base brillante */}
           <img
-            src="/gsap3/normal.png"
+            src="/gsap3/normalita.webp"
             alt=""
             aria-hidden
             className="absolute inset-0 z-[1] w-full h-full select-none pointer-events-none"
           />
           {/* z-2 overlay oscuro — fade out reveal */}
           <img
-            src="/gsap3/opacidad_negra.png"
+            src="/gsap3/opaca-negra.webp"
             alt=""
             aria-hidden
             className="pb-oscuro absolute inset-0 z-[2] w-full h-full pointer-events-none"
           />
-          {/* z-4 recorte persona — Santi Chill (z-3) pasa por detras, Creador Digital (z-6) por delante */}
+          {/* z-4 recorte persona — Ron Lach (z-3) pasa por detras, Creador Digital (z-6) por delante */}
           <img
-            src="/gsap3/no_bg.png"
+            src="/gsap3/sin-fondo.webp"
             alt=""
             aria-hidden
             className="absolute inset-0 z-[4] w-full h-full select-none pointer-events-none"
@@ -126,15 +126,15 @@ export default function PersonalBrand() {
                   style={{
                     fontSize: "min(15vw, 19.2rem)",
                     letterSpacing: "-0.04em",
-                    color: "#ffbc95",
+                    color: "#a64333",
                     fontWeight: 500,
                     lineHeight: 0.92,
                     display: "inline-flex",
                     gap: "0.25em",
                   }}
                 >
-                  <span className="pb-santi inline-block">Santi</span>
-                  <span className="pb-chill inline-block">Chill</span>
+                  <span className="pb-ron inline-block">Ron</span>
+                  <span className="pb-lach inline-block">Lach</span>
                 </span>
               </div>
             </div>
@@ -152,7 +152,7 @@ export default function PersonalBrand() {
                   style={{
                     fontSize: "min(15vw, 19.2rem)",
                     letterSpacing: "-0.04em",
-                    color: "#ffbc95",
+                    color: "#a64333",
                     fontWeight: 500,
                     lineHeight: 0.92,
                     display: "inline-block",

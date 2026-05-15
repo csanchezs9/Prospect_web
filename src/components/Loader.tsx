@@ -4,7 +4,7 @@ import gsap from "gsap";
 
 /**
  * Minimal loader inspired by juanmora.co.
- * - Cream overlay, small centered wordmark with peach dot between "Santi" and "Chill".
+ * - Cream overlay, small centered wordmark with peach dot between "Ron" and "Lach".
  * - Tiny live counter for progress signal.
  * - Dot expands to paint the screen, overlay slides up off screen.
  */
@@ -79,13 +79,13 @@ export default function Loader() {
     <div ref={overlay} className="loader-root">
       <div ref={wordmark} className="loader-wordmark">
         <span className="loader-text">
-          {"Santi".split("").map((ch, i) => (
+          {"Ron".split("").map((ch, i) => (
             <span key={`s-${i}`} className="loader-char">{ch}</span>
           ))}
         </span>
         <span className="loader-name-dot" />
         <span className="loader-text">
-          {"Chill".split("").map((ch, i) => (
+          {"Lach".split("").map((ch, i) => (
             <span key={`c-${i}`} className="loader-char">{ch}</span>
           ))}
         </span>

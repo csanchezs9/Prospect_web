@@ -19,7 +19,7 @@ const goga = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: "SantiChill — Director Creativo",
+  title: "RonLach — Director Creativo",
   description: "Portfolio inspirado, construido con Next.js + GSAP + Lenis.",
 };
 

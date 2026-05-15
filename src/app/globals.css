@@ -4,8 +4,8 @@
   --bg-warm: #faf6ef;
   --bg-grey: #f4f4f4;
   --bg-cold: #e8e9ef;
-  --orange1: #ffbc95;
-  --orange2: #f99e76;
+  --orange1: #a64333;
+  --orange2: #a64333;
   --blue: #2e54fe;
   --grey: #96908c;
   --grey-dark: #706b67;
@@ -24,7 +24,7 @@
   --font-display: var(--font-display), Arial, sans-serif;
 }
 
-::selection { background: #ffbc95; color: #666; }
+::selection { background: #a64333; color: #faf6ef; }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
@@ -88,7 +88,7 @@ a { color: inherit; text-decoration: none; }
 /* shape lighting when scroll line connects */
 .cs-shape { transition: filter .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
 .cs-shape.lit {
-  filter: drop-shadow(0 0 32px var(--orange1)) drop-shadow(0 0 70px rgba(255,150,80,0.55)) brightness(1.15);
+  filter: drop-shadow(0 0 32px var(--orange1)) drop-shadow(0 0 70px rgba(166,67,51,0.55)) brightness(1.15);
   transform: scale(1.04);
 }
 
@@ -310,7 +310,7 @@ a { color: inherit; text-decoration: none; }
     0 0 0 1.5px rgba(0,0,0,0.7),
     0 0 0 2.5px rgba(255,255,255,0.04),
     0 60px 120px -30px rgba(0,0,0,0.5),
-    0 30px 60px -25px rgba(255,158,118,0.25);
+    0 30px 60px -25px rgba(166,67,51,0.25);
   transition: transform .8s cubic-bezier(.2,.7,.2,1), box-shadow .8s cubic-bezier(.2,.7,.2,1);
   isolation: isolate;
 }
@@ -321,7 +321,7 @@ a { color: inherit; text-decoration: none; }
     0 0 0 1.5px rgba(0,0,0,0.7),
     0 0 0 2.5px rgba(255,255,255,0.06),
     0 80px 140px -30px rgba(0,0,0,0.55),
-    0 40px 80px -25px rgba(255,158,118,0.35);
+    0 40px 80px -25px rgba(166,67,51,0.35);
 }
 .ipad-camera {
   position: absolute;
@@ -394,7 +394,7 @@ a { color: inherit; text-decoration: none; }
 .ipad-badge-dot {
   width: .5rem; height: .5rem; border-radius: 999px;
   background: var(--orange2);
-  box-shadow: 0 0 0 4px rgba(249,158,118,0.25);
+  box-shadow: 0 0 0 4px rgba(166,67,51,0.25);
   animation: workPulse 1.6s ease-in-out infinite;
 }
 @keyframes workPulse {
@@ -404,7 +404,7 @@ a { color: inherit; text-decoration: none; }
 
 .top-glow {
   position: absolute; top: -10%; left: 0; right: 0; height: 90vh;
-  background: radial-gradient(ellipse at 50% 0%, rgba(255,188,149,.85), transparent 60%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(166,67,51,.85), transparent 60%);
   filter: blur(40px); pointer-events: none; z-index: 0;
 }
 
@@ -415,24 +415,24 @@ a { color: inherit; text-decoration: none; }
   z-index: 60;
   background:
     linear-gradient(to right,
-      rgba(249,158,118,.26) 0%,
-      rgba(255,188,149,.1) 1.5%,
+      rgba(166,67,51,.26) 0%,
+      rgba(166,67,51,.1) 1.5%,
       transparent 4.5%,
       transparent 95.5%,
-      rgba(255,188,149,.1) 98.5%,
-      rgba(249,158,118,.26) 100%);
+      rgba(166,67,51,.1) 98.5%,
+      rgba(166,67,51,.26) 100%);
 }
 .edge-glow::after {
   content: "";
   position: absolute; inset: 0;
   background:
     linear-gradient(to bottom,
-      rgba(249,158,118,.26) 0%,
-      rgba(255,188,149,.1) 1.5%,
+      rgba(166,67,51,.26) 0%,
+      rgba(166,67,51,.1) 1.5%,
       transparent 4.5%,
       transparent 95.5%,
-      rgba(255,188,149,.1) 98.5%,
-      rgba(249,158,118,.26) 100%);
+      rgba(166,67,51,.1) 98.5%,
+      rgba(166,67,51,.26) 100%);
 }
 
 /* Hero curve mask */

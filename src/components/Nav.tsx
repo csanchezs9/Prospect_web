@@ -89,16 +89,16 @@ export default function Nav() {
   return (
     <header ref={headerRef} className="nav-header fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-7 flex items-center justify-between text-lg">
       <Link href="/" className="flex items-baseline gap-2.5 font-medium tracking-tight text-xl">
-        <span className="nav-name-jm">Santi</span>
+        <span className="nav-name-jm">Ron</span>
         <span className="w-2.5 h-2.5 rounded-full bg-[var(--orange1)] inline-block translate-y-[-2px]" />
-        <span className="nav-name-jm">Chill </span>
+        <span className="nav-name-jm">Lach </span>
       </Link>
       <nav className="hidden md:flex items-center gap-10 text-base">
         <button type="button" onClick={scrollToServices} className="nav-link cursor-pointer" data-hover data-hover-text="Servicios">About</button>
         <button type="button" onClick={scrollToServices} className="nav-link cursor-pointer" data-hover data-hover-text="Servicios">Work</button>
       </nav>
       <ul className="hidden md:flex items-center gap-6 text-base">
-        <li><a className="nav-social-link" href="mailto:santichill@gmail.com">Email</a></li>
+        <li><a className="nav-social-link" href="mailto:ronlach@gmail.com">Email</a></li>
         <li><a className="nav-social-link" href="https://linkedin.com" target="_blank">in</a></li>
         <li><a className="nav-social-link" href="https://x.com" target="_blank">x</a></li>
         <li><a className="nav-social-link" href="https://behance.net" target="_blank">Be</a></li>
