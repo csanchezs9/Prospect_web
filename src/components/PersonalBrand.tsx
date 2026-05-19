@@ -16,10 +16,7 @@ export default function PersonalBrand() {
       const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
       const startMain = isMobile ? "top 66%" : "top 38%";
       const endMain = isMobile ? "center 56%" : "center 28%";
-      const startSep = isMobile ? "top 33%" : "top 5%";
-      const endSep = isMobile ? "top 18%" : "top -10%";
-
-      // anim on-enter solo, sin pin/sticky — imagen scrollea natural
+// anim on-enter solo, sin pin/sticky — imagen scrollea natural
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ref.current,
@@ -34,7 +31,7 @@ export default function PersonalBrand() {
         .fromTo(
           ".pb-text",
           { x: "-45vw", autoAlpha: 1 },
-          { x: "0vw", autoAlpha: 1, ease: "none", duration: 0.5 },
+          { x: "4vw", autoAlpha: 1, ease: "none", duration: 0.5 },
           0
         )
         .fromTo(
@@ -45,29 +42,6 @@ export default function PersonalBrand() {
         )
         .fromTo(".pb-oscuro", { opacity: 1 }, { opacity: 0, ease: "none", duration: 0.5 }, 0.5);
 
-      // anim corta anidada: separar Ron <-> Lach al finalizar
-      gsap.to(".pb-ron", {
-        x: "-0.6em",
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: ref.current,
-          start: startSep,
-          end: endSep,
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-      gsap.to(".pb-lach", {
-        x: "0.6em",
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: ref.current,
-          start: startSep,
-          end: endSep,
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
     }, ref);
 
     return () => ctx.revert();
@@ -130,11 +104,11 @@ export default function PersonalBrand() {
                     fontWeight: 500,
                     lineHeight: 0.92,
                     display: "inline-flex",
-                    gap: "0.25em",
+                    gap: "1.8em",
                   }}
                 >
-                  <span className="pb-ron inline-block">Ron</span>
                   <span className="pb-lach inline-block">Lach</span>
+                  <span className="pb-ron inline-block">Ron</span>
                 </span>
               </div>
             </div>
